@@ -1,9 +1,14 @@
 {
   "pages": [
+<<<<<<< HEAD
     "pages/home/home",
     "pages/index/index",
     "pages/logs/logs",
     "pages/my/my"
+=======
+    "pages/index/index",
+    "pages/logs/logs"
+>>>>>>> a5a9aafb8359cb68c159d269e61d3584e4aca576
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -11,6 +16,7 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
+<<<<<<< HEAD
   "sitemapLocation": "sitemap.json",
   "tabBar": {
     "color": "#707070",
@@ -35,4 +41,7 @@
       }
     ]
   }
+=======
+  "sitemapLocation": "sitemap.json"
+>>>>>>> a5a9aafb8359cb68c159d269e61d3584e4aca576
 }

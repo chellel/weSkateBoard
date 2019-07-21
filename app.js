@@ -34,9 +34,13 @@ App({
     })
   },
   globalData: {
+<<<<<<< HEAD
     userInfo: null,
     message:{
       noDataText:"暂无数据"
     }
+=======
+    userInfo: null
+>>>>>>> a5a9aafb8359cb68c159d269e61d3584e4aca576
   }
 })
