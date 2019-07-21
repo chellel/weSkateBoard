@@ -1,0 +1,47 @@
+<!--pages/home/home.wxml-->
+
+<view class="weui-tab">
+  <scroll-view scroll-x="true" class="weui-navbar" scroll-left="{{scrollLeft}}">
+    <block wx:for-items="{{dataSource}}" wx:key="id" wx:index="index">
+      <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ?'weui-bar__item_on':''}}" bindtap="switchNav" style="width:{{tabW}}px">
+        <view class="weui-navbar__title"> {{item.title}}</view>
+      </view>
+    </block>
+    <view class="weui-navbar__slider" style="width:{{tabW}}px;transform:translateX({{slideOffset}}px);"></view>
+  </scroll-view>
+
+  <swiper current="{{activeIndex}}" class="swiper-box " duration="200" bindchange="switchTab" style="height: {{clientHeight}}px">
+    <swiper-item class="swiper-item" wx:for-items="{{dataSource}}" wx:for-item='tabitem' wx:key="id" wx:index="index">
+      <scroll-view scroll-y="true" class="scoll-h" style="height: {{clientHeight}}px" bindscroll="onPageScroll">
+
+        <!-- 教程 -->
+        <block wx:if="{{tabitem.slotname=='slot3'}}">
+        <image src="http://img3.doubanio.com/view/note/raw/public/p49861582.jpg" />
+          <view>
+
+          </view>
+        </block>
+        <!-- 动作 -->
+        <block wx:elif="{{tabitem.slotname=='slot2'}}">
+          <view>
+
+
+          </view>
+        </block>
+
+        <!-- 其他 -->
+        <block wx:else>
+          <view class='img-content col-md-4 col-xs-6' wx:for-items="{{imageDataSource}}" wx:for-item="item">
+            <image class="data-echo" src="https://chellel.github.io/myblog/skateboard/image%20({{item.id}}).jpg" mode="aspectFill" lazy-load='true' />
+          </view>
+        </block>
+
+        <slot name="{{item.slotname}}"></slot>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+  <view>
+
+  </view>
+
+</view>
