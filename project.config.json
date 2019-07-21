@@ -4,21 +4,13 @@
 		"ignore": []
 	},
 	"setting": {
-<<<<<<< HEAD
 		"urlCheck": false,
-=======
-		"urlCheck": true,
->>>>>>> a5a9aafb8359cb68c159d269e61d3584e4aca576
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-<<<<<<< HEAD
 		"autoAudits": false,
 		"checkInvalidKey": true
-=======
-		"autoAudits": false
->>>>>>> a5a9aafb8359cb68c159d269e61d3584e4aca576
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.5",

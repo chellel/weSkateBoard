@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "dxTabPanel":"/components/dxTabPanel/dxTabPanel"
-  }
+  },
+  "navigationBarTitleText": "SkateBoard"
 }

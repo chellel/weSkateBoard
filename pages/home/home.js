@@ -1,4 +1,6 @@
 // pages/home/home.js
+var app=getApp();
+const utils=require("../../utils/util.js")
 var mtabW; //tabpanel选项卡标题栏宽度
 
 Page({
@@ -6,8 +8,9 @@ Page({
   /**
    * 页面的初始数据
    */
+
   data: {
-    dataSource: [{
+    tabDataSource: [{
         title: "教程",
         slotname: "slot1"
       },
@@ -110,11 +113,10 @@ Page({
     sliderLeft: 0,
     hasline: true,
     // 这里是一些组件内部数据
-    activeIndex: 0, //当前项的值
+    activeIndex: 1, //当前项的值
     scrollLeft: 0, //tab标题的滚动条位置
     slideOffset: 0,
     tabW: 0,
-    winHeight: "", //窗口高度
     copy: {}
   },
 
@@ -123,9 +125,9 @@ Page({
   switchNav: function(e) {
     var that = this;
     var idIndex = parseInt(e.currentTarget.id);
-    if (this.data.activeIndex === idIndex) {
-      return false
-    } else {
+    if (this.data.activeIndex === idIndex) 
+      return
+     else {
       var offsetW = e.currentTarget.offsetLeft; //2种方法获取距离文档左边有多少距离
       this.setData({
         activeIndex: idIndex,
@@ -168,26 +170,19 @@ Page({
     }
   },
   /**设置tab导航标题的宽度 */
-  autoTabNavWidth() {
+  autoTabNavWidth(dataSource) {
     var that = this;
-    wx.getSystemInfo({
-      success: function(res) {
-        var num = that.data.dataSource.length;
+    var systemInfo=app.globalData.systemInfo;
+        var num = dataSource.length;
         if (num > 4) num = 4;
-        mtabW = res.windowWidth / num;
+    mtabW = systemInfo.windowWidth / num;
         that.setData({
-          tabW: mtabW
-        })
-        var clientHeight = res.windowHeight,
-          clientWidth = res.windowWidth,
-          rpxR = 750 / clientWidth;
-        var calc = clientHeight * rpxR - 90;
-        that.setData({
-          winHeight: calc,
-          clientHeight: res.windowHeight - 60 //scroll-view内容的高度等于 设备的高度 - tab标题高度
+          tabW: mtabW,
+          clientHeight: systemInfo.windowHeight - 60, //scroll-view内容的高度等于 设备的高度 - tab标题高度
+          slideOffset: systemInfo.windowWidth / num * that.data.activeIndex
         });
-      }
-    });
+        console.log(that.data)
+     
   },
   tabClick: function(e) {
     this.setData({
@@ -206,6 +201,14 @@ Page({
   onPageScroll(e) {
  //   this.getRect();
   },
+previewImg(e){
+  debugger
+
+  wx.previewImage({
+    urls: [],
+  })
+},
+
   getRect() {
     var offset = 0;
     var clientHeight = wx.getSystemInfoSync().windowHeight;
@@ -231,6 +234,12 @@ Page({
 
 
   },
+  onTrickClick(e){
+    debugger
+    wx.navigateTo({
+      url: `/pages/detail/detail?id=${e}`,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -242,16 +251,14 @@ Page({
     }
   //  var _inView = this.getRect();
 
-    this.autoTabNavWidth();
-
-    wx.request({
-      url: 'https://www.easy-mock.com/mock/5d302560f532ea49fab32d91/skateboard/getTrick',
-      type: "GET",
-      success: function(res) {
-        console.log(res.data.items)
-      }
-    })
-
+    this.autoTabNavWidth(this.data.tabDataSource);
+var that=this;
+    utils.getTricks((data)=>{
+      console.log(data.items)
+      that.setData({
+        trickDataSource: data.items
+      });
+    });
   },
 
   /**

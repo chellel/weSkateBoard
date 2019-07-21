@@ -1,11 +1,7 @@
 /* pages/home/home.wxss */
-@import "../../weui.wxss";
+
 page {
   height: 100%;
-}
-
-swiper-item {
-  display: unset;
 }
 
 view, scroll-view {
@@ -43,11 +39,6 @@ view, scroll-view {
   height: 2px;
 }
 
-.swiper-box .swiper-item {
-  text-align: center;
-  height: 100%;
-}
-
 .scoll-h {
   height: 100%;
 }
@@ -75,22 +66,42 @@ view, scroll-view {
   color: #ed1b24;
 }
 
-.col-md-4{
-  width:33.333333333%;
-}
-.col-xs-6{
-  width:50%;
-}
-
-.img-content{
+.img-content {
   padding: 5px;
   float: left;
-  height:200px;
-/*display:inline-block;*/
-box-sizing:border-box;
-
+  height: 200px;
+  /*display:inline-block;*/
+  box-sizing: border-box;
 }
 
-.img-content image{
-  width:100%;height:100%;
+.img-content image {
+  width: 100%;
+  height: 100%;
+}
+
+.weui-panel__bd:after {
+  content: " ";
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  height: 1px;
+  color: #d9d9d9;
+}
+
+.weui-media-box:active,.weui-media-box:active weui-media-box__title {
+  opacity: 0.6;
+}
+
+
+.weui-media-box__title {
+  width: 70%;
+  display: inline-block;
+}
+
+.weui-media-box_tip {
+  text-align: right;
+  width: 30%;
+  float: right;
+  color: #c1c1c1;
+  font-size: 14px;
 }

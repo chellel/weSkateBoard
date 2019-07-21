@@ -1,9 +1,7 @@
 /**app.wxss**/
-<<<<<<< HEAD
-@import "weui.wxss";
+@import "/style/weui.wxss";
+@import "/style/iconfont.wxss";
 
-=======
->>>>>>> a5a9aafb8359cb68c159d269e61d3584e4aca576
 .container {
   height: 100%;
   display: flex;
@@ -13,10 +11,14 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
-<<<<<<< HEAD
 
 .selectedColor{
   color:#ed1b24;
 }
-=======
->>>>>>> a5a9aafb8359cb68c159d269e61d3584e4aca576
+
+.col-md-4{
+  width:33.333333333%;
+}
+.col-xs-6{
+  width:50%;
+}

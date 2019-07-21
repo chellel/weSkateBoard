@@ -1,0 +1,14 @@
+/* pages/discover/discover.wxss */
+
+.section .discover-image{
+  width:100%;
+}
+.section .image-content{
+padding: 5px;
+box-sizing: border-box;
+float: left;
+}
+.section .discover-image{
+  height: 100px;
+  margin-bottom: 10px;
+}

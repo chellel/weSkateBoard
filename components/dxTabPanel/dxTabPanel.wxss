@@ -1,5 +1,5 @@
 /* pages/component/dxTabPanel/dxTabPanel.wxss */
-@import "../../weui.wxss";
+@import "../../style/weui.wxss";
 
 page {
   height: 100%;

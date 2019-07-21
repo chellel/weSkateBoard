@@ -1,0 +1,30 @@
+<!--pages/detail/detail.wxml-->
+<view class="page">
+  <view class="head-content">
+    <image src="{{imgUrl}}" mode="scaleToFill" bindtap="previewImg" style="max-height:{{windowHeight/3}}px;"></image>
+  </view>
+  <view class="content">
+    <view class="weui-panel">
+      <view class="weui-panel-hd">
+        <view class="page-title">ollie</view>
+        <view class="page-tip">
+          <view class="page-tip-text">
+            浏览：1
+          </view>
+          <icon class="icon iconfont icon-eye"></icon>
+        </view>
+      </view>
+      <view class="page-desc">即用双脚带板起跳。这个动作是进入滑板自由世界的门槛，我想也是令许多人踏上滑板之路的原因。（ollie的来历:ollie这一动作由美国滑手allan gelfand首创，而他的小名就叫“ollie”。1979年 ，15岁的allan在福罗理达州的好利坞市的一个滑板公园中练习，在一个碗形游泳池中，他发现自己居然 可以不用手抓板而带板腾空。他的同伴就将这个动作称为“ollie”。各位滑友大概想不道在79年的美国 才出现这个动作吧？allan后来成为当时最劲的白骨队成员，但他只作了两年pro就转行搞赛车了，但这个创造的意义是不言自明了。）
+        (ollie)
+      </view>
+
+
+    </view>
+    <view class="weui-media-box__info">
+      <view class="weui-media-box__info__meta">文字来源</view>
+      <view class="weui-media-box__info__meta">2019-07-21</view>
+      <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+    </view>
+  </view>
+
+</view>
