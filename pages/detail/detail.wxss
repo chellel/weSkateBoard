@@ -11,6 +11,7 @@
 
 .weui-panel-hd {
   margin: 8px 0;
+  display: flex;
 }
 
 .head-content image {
@@ -40,27 +41,9 @@
 }
 
 .page-title {
-  width: 70%;
-  display: inline-block;
-}
-
-.page-tip {
-  width: 30%;
-  float: right;
-  font-size: 12px;
-  color: #c1c1c1;
-  line-height: 40px;
-}
-
-.page-tip .icon {
-  font-size: 14px;
-}
-
-.page-tip .page-tip-text {
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-.page-tip .icon, .page-tip .page-tip-text {
-  float: right;
+  flex: 1;
+  -webkit-flex: 1;
+  -webkit-box-flex: 1;
+  display: flex;
+  align-items: center;
 }

@@ -1,6 +1,7 @@
 // pages/home/home.js
 var app=getApp();
 const utils=require("../../utils/util.js")
+const api=require("../../utils/api.js");
 var mtabW; //tabpanel选项卡标题栏宽度
 
 Page({
@@ -107,13 +108,17 @@ Page({
         show: false
       }
     ],
+
+topicInfo:{},
+readMore:false,
+
     // 这里定义了innerText属性，属性值可以在组件使用时指定
     noDataText: getApp().globalData.message.noDataText,
     sliderOffset: 0,
     sliderLeft: 0,
     hasline: true,
     // 这里是一些组件内部数据
-    activeIndex: 1, //当前项的值
+    activeIndex: 0, //当前项的值
     scrollLeft: 0, //tab标题的滚动条位置
     slideOffset: 0,
     tabW: 0,
@@ -198,12 +203,16 @@ Page({
     })
   },
 
+  readMore(){
+    this.setData({
+      readMore:!this.data.readMore
+    })
+  },
+
   onPageScroll(e) {
  //   this.getRect();
   },
 previewImg(e){
-  debugger
-
   wx.previewImage({
     urls: [],
   })
@@ -259,6 +268,38 @@ var that=this;
         trickDataSource: data.items
       });
     });
+    var testUrl = 'https://zhuanlan.zhihu.com/api/recommendations/columns?limit=6&offset=6&seed=7';
+
+
+    var baseUrl ="http://www.zhihu.com/collection/25547043?page=1";
+    
+    var me ="https://www.zhihu.com/api/v4/me?include=ad_type%3Bavailable_message_types%2Cdefault_notifications_count%2Cfollow_notifications_count%2Cvote_thank_notifications_count%2Cmessages_count%3Baccount_status%2Cis_bind_phone%2Cis_force_renamed%2Cemail%2Crenamed_fullname";
+    var questionId ="39479153";
+
+    var question ="https://www.zhihu.com/api/v4/questions/47825917/answers?&limit=20&offset=0";
+
+    var requestURL ="https://www.zhihu.com/api/search?type=content&q=%E6%BB%91%E6%9D%BF";
+    
+    var skateboardTid ="19629946";
+    var topicsUrl ="https://www.zhihu.com/api/v4/topics/19629946";
+    var topicUrl =`https://www.zhihu.com/api/v4/topics/${skateboardTid}/feeds/essence`;
+
+    //var baseUrl ="http://localhost:49738/apihandle.ashx";
+    //var baseUrl ="http://192.168.1.166:1598/apihandle.ashx";
+  
+    api.GET(topicsUrl).then((topicInfo)=>{
+      this.setData({
+        topicInfo
+      })
+
+    });
+    wx.request({
+      url: topicUrl,
+  //    data:{name:"nk"},
+      method:"GET",
+      success:(res)=>{
+      }
+    })
   },
 
   /**

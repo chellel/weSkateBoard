@@ -22,3 +22,24 @@
 .col-xs-6{
   width:50%;
 }
+
+
+
+.weui-media-box_tip{
+  font-size: 12px;
+  color: #c1c1c1;
+  line-height: 40px;
+}
+
+.weui-media-box_tip .icon {
+  font-size: 14px;
+}
+
+.weui-media-box_tip .page-tip-text {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.weui-media-box_tip .page-tip-text {
+  float: right;
+}

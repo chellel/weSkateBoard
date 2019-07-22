@@ -15,7 +15,6 @@ const http=({
         wx.hideLoading();
         wx.getNetworkType({
           success: function(res) {
-            debugger
             if(res.networkType=="none"){
 wx.showModal({
   content: '无法连接到网络，请检查',
