@@ -87,9 +87,9 @@ view, scroll-view {
   height: 1px;
   color: #d9d9d9;
 }
-.weui-media-box{
-padding:8px 15px;
 
+.weui-media-box {
+  padding: 8px 15px;
 }
 
 .weui-media-box:active, .weui-media-box:active weui-media-box__title {
@@ -129,12 +129,27 @@ padding:8px 15px;
 }
 
 .weui-media-box__info {
-  margin-top: 0;
+  margin-top: 5px;
   padding-bottom: 10px;
   color: #8590a6;
 }
 
-.weui-cell_access.weui-cell_readmore {
-  justify-content:flex-end;
+.weui-cell.weui-cell_readmore {
+  justify-content: flex-end;
   font-size: 12px;
+padding: 0 15px;
+}
+
+.weui-cell__text {
+  flex: 1;
+  align-items: center;
+  display: flex;
+}
+
+.weui-cell__ft {
+  display: flex;
+}
+
+.weui-cell__ft icon {
+  line-height: 35px;
 }

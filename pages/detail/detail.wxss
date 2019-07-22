@@ -5,9 +5,7 @@
   padding: 15px;
 }
 
-.page-title {
-  font-size: 24px;
-}
+
 
 .weui-panel-hd {
   margin: 8px 0;
@@ -46,4 +44,5 @@
   -webkit-box-flex: 1;
   display: flex;
   align-items: center;
+  font-size: 24px;
 }

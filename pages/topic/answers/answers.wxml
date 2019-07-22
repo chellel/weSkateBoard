@@ -1,0 +1,6 @@
+<!--pages/topic/answers/answers.wxml-->
+<import src="../../../templates/wePanel/wePanel.wxml" />
+<view class="page">
+<template is="wePanel" data="{{dataSource}}"></template>
+
+</view>

@@ -1,0 +1,40 @@
+
+.weui-panel__hd {
+  align-items: center;
+  display: flex;
+}
+
+.weui-panel__hd .avator {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.weui-panel__hd::after {
+  display: none;
+}
+
+.weui-media-box {
+  padding-top: 0;
+}
+
+.weui-panel::before {
+  display: none;
+}
+
+.weui-panel:after {
+  left: 15px;
+}
+
+.weui-panel {
+  margin-top: 0;
+}
+
+.weui-media-box__desc {
+  color: #666;
+}
+
+.weui-media-box__info {
+  color: #888;
+}

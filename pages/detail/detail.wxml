@@ -1,7 +1,7 @@
 <!--pages/detail/detail.wxml-->
 <view class="page">
   <view class="head-content">
-    <image src="{{imgUrl}}" mode="scaleToFill" bindtap="previewImg" style="max-height:{{windowHeight/3}}px;"></image>
+    <image src="{{imgUrl}}" mode="aspectFill" bindtap="previewImg" style="max-height:{{windowHeight/3}}px;"></image>
   </view>
   <view class="content">
     <view class="weui-panel">

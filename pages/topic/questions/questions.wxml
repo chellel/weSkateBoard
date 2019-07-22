@@ -1,0 +1,3 @@
+<!--pages/questions/questions.wxml-->
+<import src="../templates/wePanel/wePanel.wxml" />
+<template is="wePanel" data="{{dataSource}}"></template>
