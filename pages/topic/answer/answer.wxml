@@ -1,0 +1,39 @@
+<!--pages/topic/answer/answer.wxml-->
+<import src="/utils/wxParse/wxParse.wxml" />
+<view class='content'>
+  <view class="weui-panel__hd">
+    <image class="avator" src=" {{dataSource.author.avatar_url}}" />
+    <view class="weui-media-box__bd">
+      <view class='weui-media-box__title'>
+        {{dataSource.author.name}}
+      </view>
+      <view class='weui-media-box__desc'>{{dataSource.author.headline}}</view>
+    </view>
+
+  </view>
+  <view class="weui-panel__bd">
+    <view class="weui-media-box">
+      <view class="weui-media-box__content">
+        <template is="wxParse" data="{{wxParseData:content.nodes}}" />
+      </view>
+      <view class="weui-media-box__info">
+        <view class="weui-media-box__info__meta weui-media-box__handlike">
+          <button class='weui-media-box__info__button {{isVoteUp?"weui-media-box__info__button__active":""}}' bindtap='VoteUp'>
+            <icon class='icon iconfont icon-{{isVoteUp?"thumb-up":"thumb-up-outline"}}'></icon>
+            <view>{{isVoteUp?"已赞同":"赞同"}}
+             {{dataSource.voteup_count}}</view>
+          </button>
+        </view>
+
+        <view class="weui-media-box__info__meta">
+          <icon class='icon iconfont icon-message'></icon>
+          <view>{{dataSource.comment_count}}条评论</view>
+        </view>
+        <view class="weui-media-box__info__meta weui-media-box__info__meta__star" bindtap='Star'>
+          <icon class='icon iconfont icon-{{isStar?"star1":"starempty"}}'></icon>
+          <view>{{isStar?"已收藏":"收藏"}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

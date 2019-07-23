@@ -1,0 +1,72 @@
+/* pages/topic/answer/answer.wxss */
+@import "/templates/wePanel/wePanel.wxss";
+
+.weui-media-box__content {
+  font-size: 14px;
+}
+
+.weui-media-box__title {
+  font-size: 16px;
+}
+
+.weui-media-box__desc {
+  color: #999;
+}
+
+.weui-panel__hd {
+  color: #000;
+  padding:10px 5px;
+}
+
+.weui-media-box {
+  padding: 5px;
+}
+
+.weui-media-box__info__meta {
+  display: flex;
+  height: 40px;
+  line-height: 40px;
+}
+
+.weui-media-box__info {
+  margin-bottom: 15px;
+}
+
+
+.weui-media-box__info__meta icon {
+  margin-right: 2px;
+}
+.weui-media-box__info__button::after{
+  border: none;
+}
+.weui-media-box__info__button{
+display:inline-block;
+display:flex;
+font-size:12px;
+line-height:40px;
+height:40px;
+border:none!important;
+background:rgba(0,132,255,.1);
+
+}
+.weui-media-box__info__button{
+  background: rgba(0,132,255,.1);
+   color: #0084ff;
+   padding:0px 10px;
+
+}
+.weui-media-box__info__meta__star{
+   color: #0084ff;
+
+}
+.weui-media-box__info__meta__star:active{
+  opacity: 0.6;
+}
+.weui-media-box__info__button__active{
+background: #0084ff;
+color:#fff;
+}
+.weui-media-box__info__button:active{
+background: #9ed2fd;
+color: #fff;
+}

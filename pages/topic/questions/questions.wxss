@@ -1,2 +1,2 @@
 /* pages/topic/questions/questions.wxss */
-@import "../../../templates/wePanel/wePanel.wxss";
+@import "/templates/wePanel/wePanel.wxss";

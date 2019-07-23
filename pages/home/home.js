@@ -1,7 +1,7 @@
 // pages/home/home.js
-var app=getApp();
-const utils=require("../../utils/util.js")
-const api=require("../../utils/api.js");
+var app = getApp();
+const utils = require("../../utils/util.js")
+const api = require("../../utils/api.js");
 var mtabW; //tabpanel选项卡标题栏宽度
 
 Page({
@@ -11,6 +11,7 @@ Page({
    */
 
   data: {
+    imageUrls: [],
     tabDataSource: [{
         title: "教程",
         slotname: "slot1"
@@ -109,8 +110,8 @@ Page({
       }
     ],
 
-topicInfo:{},
-readMore:false,
+    topicInfo: {},
+    readMore: false,
 
     // 这里定义了innerText属性，属性值可以在组件使用时指定
     noDataText: getApp().globalData.message.noDataText,
@@ -130,9 +131,9 @@ readMore:false,
   switchNav: function(e) {
     var that = this;
     var idIndex = parseInt(e.currentTarget.id);
-    if (this.data.activeIndex === idIndex) 
+    if (this.data.activeIndex === idIndex)
       return
-     else {
+    else {
       var offsetW = e.currentTarget.offsetLeft; //2种方法获取距离文档左边有多少距离
       this.setData({
         activeIndex: idIndex,
@@ -177,17 +178,17 @@ readMore:false,
   /**设置tab导航标题的宽度 */
   autoTabNavWidth(dataSource) {
     var that = this;
-    var systemInfo=app.globalData.systemInfo;
-        var num = dataSource.length;
-        if (num > 4) num = 4;
+    var systemInfo = app.globalData.systemInfo;
+    var num = dataSource.length;
+    if (num > 4) num = 4;
     mtabW = systemInfo.windowWidth / num;
-        that.setData({
-          tabW: mtabW,
-          clientHeight: systemInfo.windowHeight - 60, //scroll-view内容的高度等于 设备的高度 - tab标题高度
-          slideOffset: systemInfo.windowWidth / num * that.data.activeIndex
-        });
-        console.log(that.data)
-     
+    that.setData({
+      tabW: mtabW,
+      clientHeight: systemInfo.windowHeight - 60, //scroll-view内容的高度等于 设备的高度 - tab标题高度
+      slideOffset: systemInfo.windowWidth / num * that.data.activeIndex
+    });
+    console.log(that.data)
+
   },
   tabClick: function(e) {
     this.setData({
@@ -203,20 +204,35 @@ readMore:false,
     })
   },
 
-  readMore(){
+  readMore() {
     this.setData({
-      readMore:!this.data.readMore
+      readMore: !this.data.readMore
     })
   },
 
   onPageScroll(e) {
- //   this.getRect();
+    //   this.getRect();
   },
-previewImg(e){
-  wx.previewImage({
-    urls: [],
-  })
-},
+  previewImg(e) {
+    var index = e.currentTarget.dataset.index;
+
+    wx.previewImage({
+      current: this.data.imageUrls[index],
+      urls: this.data.imageUrls
+    })
+  },
+  previewImg1(e) {
+    var index = e.currentTarget.dataset.index;
+    var imageDataSource = this.data.imageDataSource;
+    var imageUrls = [];
+    for (var i in imageDataSource) {
+      imageUrls.push("https://chellel.github.io/myblog/skateboard/image%20(" + imageDataSource[i].id + ").jpg")
+    }
+    wx.previewImage({
+      current: imageUrls[index],
+      urls: imageUrls
+    })
+  },
 
   getRect() {
     var offset = 0;
@@ -243,27 +259,36 @@ previewImg(e){
 
 
   },
-  onTrickClick(e){
-    debugger
+  onTrickClick(e) {
+    var index = e.currentTarget.dataset.index;
+    var item = this.data.trickDataSource[index];
+    var data = JSON.stringify(item);
     wx.navigateTo({
-      url: `/pages/detail/detail?id=${e}`,
+      url: `/pages/detail/detail?data=${data}`,
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var imageUrls = [];
+    for (var i = 1; i <= 4; i++) {
+      imageUrls.push("https://chellel.github.io/myblog/skateboard/image%20(" + i + ").jpg");
+    }
+    this.setData({
+      imageUrls
+    })
+
     var store = [];
     var nodes = wx.createSelectorQuery().selectAll(".data-echo");
     for (var i = 0; i < nodes.length; i++) {
       store.push(nodes[i]);
     }
-  //  var _inView = this.getRect();
+    //  var _inView = this.getRect();
 
     this.autoTabNavWidth(this.data.tabDataSource);
-var that=this;
-    utils.getTricks((data)=>{
-      console.log(data.items)
+    var that = this;
+    utils.getTricks((data) => {
       that.setData({
         trickDataSource: data.items
       });
@@ -271,33 +296,37 @@ var that=this;
     var testUrl = 'https://zhuanlan.zhihu.com/api/recommendations/columns?limit=6&offset=6&seed=7';
 
 
-    var baseUrl ="http://www.zhihu.com/collection/25547043?page=1";
-    
-    var me ="https://www.zhihu.com/api/v4/me?include=ad_type%3Bavailable_message_types%2Cdefault_notifications_count%2Cfollow_notifications_count%2Cvote_thank_notifications_count%2Cmessages_count%3Baccount_status%2Cis_bind_phone%2Cis_force_renamed%2Cemail%2Crenamed_fullname";
-    var questionId ="39479153";
+    var baseUrl = "http://www.zhihu.com/collection/25547043?page=1";
 
-    var question ="https://www.zhihu.com/api/v4/questions/47825917/answers?&limit=20&offset=0";
+    var me = "https://www.zhihu.com/api/v4/me?include=ad_type%3Bavailable_message_types%2Cdefault_notifications_count%2Cfollow_notifications_count%2Cvote_thank_notifications_count%2Cmessages_count%3Baccount_status%2Cis_bind_phone%2Cis_force_renamed%2Cemail%2Crenamed_fullname";
+    var questionId = "39479153";
 
-    var requestURL ="https://www.zhihu.com/api/search?type=content&q=%E6%BB%91%E6%9D%BF";
-    
-    var skateboardTid ="19629946";
-    var topicsUrl ="https://www.zhihu.com/api/v4/topics/19629946";
-    var topicUrl =`https://www.zhihu.com/api/v4/topics/${skateboardTid}/feeds/essence`;
+    var question = "https://www.zhihu.com/api/v4/questions/47825917/answers?&limit=20&offset=0";
+
+    var requestURL = "https://www.zhihu.com/api/search?type=content&q=%E6%BB%91%E6%9D%BF";
+
+    var skateboardTid = "19629946";
+    var topicsUrl = `https://www.zhihu.com/api/v4/topics/${skateboardTid}`;
 
     //var baseUrl ="http://localhost:49738/apihandle.ashx";
     //var baseUrl ="http://192.168.1.166:1598/apihandle.ashx";
-  
-    api.GET(topicsUrl).then((topicInfo)=>{
+
+    api.GET(topicsUrl).then((topicInfo) => {
       this.setData({
         topicInfo
       })
 
     });
+    var test ="https://www.zhihu.com/api/v4/topics/19629946/creator_wall??include=data[?(target.type=topic_sticky_module)].target.data[?(target.type=answer)].target.content,relationship.is_authorized,is_author,voting,is_thanked,is_nothelp;data[?(target.type=topic_sticky_module)].target.data[?(target.type=answer)].target.is_normal,comment_count,voteup_count,content,relevant_info,excerpt.author.badge[?(type=best_answerer)].topics;data[?(target.type=topic_sticky_module)].target.data[?(target.type=article)].target.content,voteup_count,comment_count,voting,author.badge[?(type=best_answerer)].topics;data[?(target.type=topic_sticky_module)].target.data[?(target.type=people)].target.answer_count,articles_count,gender,follower_count,is_followed,is_following,badge[?(type=best_answerer)].topics;data[?(target.type=answer)].target.annotation_detail,content,hermes_label,is_labeled,relationship.is_authorized,is_author,voting,is_thanked,is_nothelp;data[?(target.type=answer)].target.author.badge[?(type=best_answerer)].topics;data[?(target.type=article)].target.annotation_detail,content,hermes_label,is_labeled,author.badge[?(type=best_answerer)].topics;data[?(target.type=question)].target.annotation_detail,comment_count;&limit=10&offset=10].target.data[?(target.type=answer)].target.content,relationship.is_authorized,is_author,voting,is_thanked,is_nothelp;data[?(target.type=topic_sticky_module)].target.data[?(target.type=answer)].target.is_normal,comment_count,voteup_count,content,relevant_info,excerpt.author.badge[?(type=best_answerer)].topics;data[?(target.type=topic_sticky_module)].target.data[?(target.type=article)].target.content,voteup_count,comment_count,voting,author.badge[?(type=best_answerer)].topics;data[?(target.type=topic_sticky_module)].target.data[?(target.type=people)].target.answer_count,articles_count,gender,follower_count,is_followed,is_following,badge[?(type=best_answerer)].topics;data[?(target.type=answer)].target.annotation_detail,content,hermes_label,is_labeled,relationship.is_authorized,is_author,voting,is_thanked,is_nothelp;data[?(target.type=answer)].target.author.badge[?(type=best_answerer)].topics;data[?(target.type=article)].target.annotation_detail,content,hermes_label,is_labeled,author.badge[?(type=best_answerer)].topics;data[?(target.type=question)].target.annotation_detail,comment_count;&limit=10&offset=10)";
+    var test2 ="https://www.zhihu.com/api/v4/topics/19629946/intro?include=content.meta.content.photos";
+    var test3 ="https://www.zhihu.com/api/v3/topics/19629946/parent";
+    var test4 ="https://www.zhihu.com/api/v4/topics/19629946/feeds/top_activity?include=data%5B%3F%28target.type%3Dtopic_sticky_module%29%5D.target.data%5B%3F%28target.type%3Danswer%29%5D.target.content%2Crelationship.is_authorized%2Cis_author%2Cvoting%2Cis_thanked%2Cis_nothelp%3Bdata%5B%3F%28target.type%3Dtopic_sticky_module%29%5D.target.data%5B%3F%28target.type%3Danswer%29%5D.target.is_normal%2Ccomment_count%2Cvoteup_count%2Ccontent%2Crelevant_info%2Cexcerpt.author.badge%5B%3F%28type%3Dbest_answerer%29%5D.topics%3Bdata%5B%3F%28target.type%3Dtopic_sticky_module%29%5D.target.data%5B%3F%28target.type%3Darticle%29%5D.target.content%2Cvoteup_count%2Ccomment_count%2Cvoting%2Cauthor.badge%5B%3F%28type%3Dbest_answerer%29%5D.topics%3Bdata%5B%3F%28target.type%3Dtopic_sticky_module%29%5D.target.data%5B%3F%28target.type%3Dpeople%29%5D.target.answer_count%2Carticles_count%2Cgender%2Cfollower_count%2Cis_followed%2Cis_following%2Cbadge%5B%3F%28type%3Dbest_answerer%29%5D.topics%3Bdata%5B%3F%28target.type%3Danswer%29%5D.target.annotation_detail%2Ccontent%2Chermes_label%2Cis_labeled%2Crelationship.is_authorized%2Cis_author%2Cvoting%2Cis_thanked%2Cis_nothelp%3Bdata%5B%3F%28target.type%3Danswer%29%5D.target.author.badge%5B%3F%28type%3Dbest_answerer%29%5D.topics%3Bdata%5B%3F%28target.type%3Darticle%29%5D.target.annotation_detail%2Ccontent%2Chermes_label%2Cis_labeled%2Cauthor.badge%5B%3F%28type%3Dbest_answerer%29%5D.topics%3Bdata%5B%3F%28target.type%3Dquestion%29%5D.target.annotation_detail%2Ccomment_count%3B&limit=5&after_id=5588.59416";
     wx.request({
-      url: topicUrl,
-  //    data:{name:"nk"},
-      method:"GET",
-      success:(res)=>{
+      url: test4,
+      //    data:{name:"nk"},
+      method: "GET",
+      success: (res) => {
+        console.log(res)
       }
     })
   },

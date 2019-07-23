@@ -1,4 +1,4 @@
-var api=require("../utils/api.js");
+var api = require("../utils/api.js");
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -15,29 +15,49 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
-const getTricks=function(callback){
+const getTricks = function(callback) {
   wx.showLoading({
     title: '加载中...',
   })
-  api.GET("https://www.easy-mock.com/mock/5d302560f532ea49fab32d91/skateboard/getTrick").then((data)=>{
+  api.GET("https://www.easy-mock.com/mock/5d302560f532ea49fab32d91/skateboard/getTrick").then((data) => {
     callback(data);
     wx.hideLoading()
   });
 }
 
-const getTrickById = function (callback) {
+const getTrickById = function(callback) {
   wx.showLoading({
     title: '加载中...',
   })
- /* api.GET("https://www.easy-mock.com/mock/5d302560f532ea49fab32d91/skateboard/getTrickById").then((data) => {
-    callback(data);
-    wx.hideLoading()
-  });*/
+  /* api.GET("https://www.easy-mock.com/mock/5d302560f532ea49fab32d91/skateboard/getTrickById").then((data) => {
+     callback(data);
+     wx.hideLoading()
+   });*/
   /**模拟getTrickById接口 */
   callback();
 }
 
+const getAnswer = function(aid, callback) {
+  // var aid = "445326904";
+  debugger
+  var aUrl = `https://www.zhihu.com/api/v4/answers/${aid}?include=data[*].is_normal,suggest_edit,comment_count,collapsed_counts,reviewing_comments_count,can_comment,content,voteup_count,reshipment_settings,comment_permission,mark_infos,created_time,updated_time,relationship.voting,is_author,is_thanked,is_nothelp,upvoted_followees;data[*].author.badge[?(type=best_answerer)].topics].topics)`;
+  api.GET(aUrl).then((res) => {
+    callback(res);
+  });
+}
+
+
+function formatWxParse(WxParse, dataSource, content, index,that) {
+    WxParse.wxParse("content" + index, 'html', content, that)
+    if (index == dataSource.length - 1) {
+      WxParse.wxParseTemArray("contentArray", "content", dataSource.length, that)
+    }
+
+}
+
 module.exports = {
   formatTime,
-  getTricks
+  getTricks,
+  getAnswer,
+  formatWxParse
 }

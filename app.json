@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/topic/answers/answers",
     "pages/topic/questions/questions",
-    "pages/detail/detail",
     "pages/home/home",
+    "pages/topic/answer/answer",
+    "pages/topic/answers/answers",
+    "pages/detail/detail",
     "pages/discover/discover",
     "pages/index/index",
     "pages/logs/logs",

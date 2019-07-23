@@ -92,7 +92,7 @@ view, scroll-view {
   padding: 8px 15px;
 }
 
-.weui-media-box:active, .weui-media-box:active weui-media-box__title {
+.weui-media-box__hd:active, .weui-media-box:active weui-media-box__title {
   opacity: 0.6;
 }
 
@@ -123,7 +123,7 @@ view, scroll-view {
 }
 
 .weui-media-box__desc {
-  -webkit-line-clamp: 8;
+  -webkit-line-clamp: 4;
   line-height: 2;
   color: #000;
 }
@@ -137,7 +137,7 @@ view, scroll-view {
 .weui-cell.weui-cell_readmore {
   justify-content: flex-end;
   font-size: 12px;
-padding: 0 15px;
+  padding: 0 15px;
 }
 
 .weui-cell__text {
@@ -152,4 +152,19 @@ padding: 0 15px;
 
 .weui-cell__ft icon {
   line-height: 35px;
+}
+
+.weui-media-box__hd {
+  display: flex;
+  align-items: center;
+}
+
+.weui-media-box__hd .avator {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.weui-media-box_tex{
+  opacity: 0.6;
 }

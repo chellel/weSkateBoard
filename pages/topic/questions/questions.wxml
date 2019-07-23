@@ -1,3 +1,6 @@
 <!--pages/questions/questions.wxml-->
-<import src="../templates/wePanel/wePanel.wxml" />
-<template is="wePanel" data="{{dataSource}}"></template>
+<import src="/templates/wePanel/wePanel.wxml" />
+<import src="/utils/wxParse/wxParse.wxml" />
+<view class='weui-panel weui-panel-multi' wx:for="{{dataSource}}" wx:for-item="item" wx:for-index="index">
+  <template is="wePanel" data="{{...item.target,index,wxParseTemArray:contentArray,showTitle:true}}"></template>
+</view>

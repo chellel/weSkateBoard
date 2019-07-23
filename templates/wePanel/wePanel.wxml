@@ -1,21 +1,23 @@
+<import src="../../utils/wxParse/wxParse.wxml" />
+
 <template name="wePanel">
-<view class="weui-panel" wx:for="{{dataSource}}" wx:for-item="item" wx:for-index="index">
   <view class="weui-panel__hd">
-    <image class="avator" src=" {{item.target.author.avatar_url}}" /> {{item.target.author.name}}
+    <image class="avator" src=" {{author.avatar_url}}" /> {{author.name}}
   </view>
-  <view class="weui-panel__bd" data-index="index" bindtap="onItemClick">
+  <view class="weui-panel__bd">
     <view class="weui-media-box weui-media-box_text">
-      <view class="weui-media-box__title weui-media-box__title_in-text">
-        {{item.target.question.title}} </view>
-      <view class="weui-media-box__desc">
-        {{item.target.excerpt}}
-      </view>
-      <view class="weui-media-box__info">
-        <view class="weui-media-box__info__meta">{{item.target.voteup_count}} 赞同</view>
-        <view class="weui-media-box__info__meta"></view>
-        <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{item.target.comment_count}} 评论</view>
+      <view wx:if="{{showTitle}}" class="weui-media-box__title weui-media-box__title_in-text" data-index="{{index}}" bindtap='onTitleClick'>
+        {{question.title}} </view>
+      <view class='weui-media-box__content' data-index="{{index}}" bindtap="onItemClick">
+        <view class="weui-media-box__desc">
+          <template is="wxParse" data="{{wxParseData:wxParseTemArray[index]}}" />
+        </view>
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta">{{voteup_count}} 赞同</view>
+          <view class="weui-media-box__info__meta"></view>
+          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{comment_count}} 评论</view>
+        </view>
       </view>
     </view>
   </view>
-</view>
 </template>
