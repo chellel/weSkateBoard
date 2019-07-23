@@ -1,2 +1,36 @@
 /* pages/topic/questions/questions.wxss */
 @import "/templates/wePanel/wePanel.wxss";
+@import "/components/dxTabPanel/dxTabPanel.wxss";
+
+.weui-narbar {
+  display: flex;margin: 5px;
+justify-content: center;
+}
+
+.weui-narbar__button {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  border-radius:2px ;
+  border: solid 1px #ed1b24;
+color: #ed1b24;
+background: none;
+margin: 0;
+font-size: 16px;
+
+}
+.weui-narbar__button:first-child{
+  border-right:0;
+}
+.weui-narbar__button:active,.weui-narbar__button__active{
+background:#ed1b24;
+color: #fff; 
+}
+.weui-narbar__button:active{
+opacity: 0.6;
+
+}
+
+.weui-narbar__button::after {
+  border: none;
+}

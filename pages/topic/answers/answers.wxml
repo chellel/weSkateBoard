@@ -3,7 +3,7 @@
 <import src="/utils/wxParse/wxParse.wxml" />
 
 <view class="page">
-  <view class="weui-panel weui-panel-multi" wx:for="{{dataSource}}" wx:for-item="item" wx:for-index="index">
+  <view class="weui-panel weui-panel-multi" wx:for="{{dataSource}}" wx:for-item="item" wx:for-index="index" wx:key="item.id">
     <template is="wePanel" data="{{...item,index,wxParseTemArray:contentArray,showTitle:false}}"></template>
   </view>
 </view>

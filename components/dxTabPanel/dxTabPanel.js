@@ -16,8 +16,7 @@ Page({
     scrollLeft: 0, //tab标题的滚动条位置
     slideOffset: 0,
     tabW: 0,
-    winHeight: "", //窗口高度
-    copy:{}
+    winHeight: "" //窗口高度
   },
   ready: function() {
   /*  this.setData({

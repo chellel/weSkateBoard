@@ -1,6 +1,25 @@
 <!--pages/questions/questions.wxml-->
 <import src="/templates/wePanel/wePanel.wxml" />
 <import src="/utils/wxParse/wxParse.wxml" />
-<view class='weui-panel weui-panel-multi' wx:for="{{dataSource}}" wx:for-item="item" wx:for-index="index">
-  <template is="wePanel" data="{{...item.target,index,wxParseTemArray:contentArray,showTitle:true}}"></template>
+<view class="weui-tab">
+<!-- narbar start -->
+  <view class="weui-narbar">
+    <block wx:for-items="{{narbar}}" wx:key="index" wx:for-index="index">
+      <button class="weui-narbar__button {{activeIndex==index?'weui-narbar__button__active':''}}" current="{{activeIndex}}" data-index="{{index}}" bindtap="switchNav">{{item.title}}</button>
+    </block>
+  </view>
+<!-- narbar end -->
+
+<!-- swiper start -->
+  <swiper current="{{activeIndex}}" class="swiper-box " duration="200" bindchange="switchTab" style="height: {{clientHeight}}px">
+    <swiper-item class="swiper-item" wx:for-items="{{narbar}}" wx:for-item='tabitem' wx:key="id" wx:index="index">
+      <scroll-view scroll-y="true" class="scoll-h" style="height: {{clientHeight}}px">
+       
+          <view class='weui-panel weui-panel-multi' wx:for="{{dataSource.activityDataSource}}" wx:for-item="item" wx:for-index="index">
+            <template is="wePanel" data="{{...item.target,index,wxParseTemArray:contentArray,showTitle:true}}"></template>
+          </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+<!-- swiper end -->
 </view>

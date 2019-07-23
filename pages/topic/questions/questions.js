@@ -8,12 +8,104 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dataSource: []
+    dataSource: {
+      activityDataSource: [],
+      essenceDataSource: []
+    },
 
+    sliderOffset: 0,
+    sliderLeft: 0,
+    hasline: true,
+    // 这里是一些组件内部数据
+    activeIndex: 0, //当前项的值
+    scrollLeft: 0, //tab标题的滚动条位置
+    slideOffset: 0,
+    tabW: 0,
+    winHeight: "", //窗口高度
+    narbar: [{
+        title: "讨论",
+        slotname: "slot1",
+        type: "top_activity",
+        datasourceId: "activityDataSource"
+      },
+      {
+        title: "精华",
+        slotname: "slot2",
+        type: "essence",
+        datasourceId: "essenceDataSource"
+
+      }
+    ]
   },
-  onTitleClick(e){
+  /**切换tab导航标题 */
+  switchNav: function(e) {
+    var that = this;
+    var idIndex = e.currentTarget.dataset.index;
+    if (this.data.activeIndex === idIndex) {
+      return false
+    } else {
+      var offsetW = e.currentTarget.offsetLeft; //2种方法获取距离文档左边有多少距离
+      this.setData({
+        activeIndex: idIndex,
+        slideOffset: offsetW
+      });
+    }
+  },
+  /**切换tab内容 */
+  switchTab: function(e) {
+    // swiper组件绑定change事件tabChange，通过e.detail.current拿到当前页
+    var current = e.detail.current;
+    if ((current + 1) % 4 == 0) {}
+    this.setData({
+      activeIndex: current
+    });
+    this.checkCor();
+    /*    var dataSource = this.data.dataSource;
+
+      var dataItems = dataSource[current].items;
+      var data = {
+        current: current,
+        items: dataItems
+      } 
+      this.triggerEvent('changeEvent', data) //changeEvent自定义事件的名称
+*/
+  },
+  //判断当前滚动超过一屏时，设置tab标题滚动条。
+  checkCor: function() {
+    if (this.data.activeIndex > 2) {
+
+      this.setData({
+        scrollLeft: 300
+      })
+    } else {
+      this.setData({
+        scrollLeft: 0
+      })
+    }
+  },
+
+  tabClick: function(e) {
+    this.setData({
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id
+    });
+  },
+
+  _onItemClick: function(e) {
+    var data = e.currentTarget.dataset.data;
+    this.triggerEvent("onItemClick", {
+      data: data.detail
+    })
+  },
+
+  onTitleClick(e) {
     var index = e.currentTarget.dataset.index;
-    var id = this.data.dataSource[index].target.question.id;
+    var {
+      activeIndex,
+      narbar
+    } = this.data;
+    var datasourceId = narbar[activeIndex].datasourceId;
+    var id = this.data.dataSource[datasourceId][index].target.question.id;
     wx.navigateTo({
       url: `../answers/answers?id=${id}`,
     })
@@ -21,15 +113,47 @@ Page({
   },
   onItemClick(e) {
     var index = e.currentTarget.dataset.index;
-    var id = this.data.dataSource[index].target.id;
-    var test = "https://www.zhihu.com/api/v4/questions/297730641/answers?include=data%5B*%5D.is_normal%2Cadmin_closed_comment%2Creward_info%2Cis_collapsed%2Cannotation_action%2Cannotation_detail%2Ccollapse_reason%2Cis_sticky%2Ccollapsed_by%2Csuggest_edit%2Ccomment_count%2Ccan_comment%2Ccontent%2Ceditable_content%2Cvoteup_count%2Creshipment_settings%2Ccomment_permission%2Ccreated_time%2Cupdated_time%2Creview_info%2Crelevant_info%2Cquestion%2Cexcerpt%2Crelationship.is_authorized%2Cis_author%2Cvoting%2Cis_thanked%2Cis_nothelp%2Cis_labeled%2Cis_recognized%2Cpaid_info%2Cpaid_info_content%3Bdata%5B*%5D.mark_infos%5B*%5D.url%3Bdata%5B*%5D.author.follower_count%2Cbadge%5B*%5D.topics&offset=&limit=3&sort_by=default&platform=desktop";
-    debugger
-    api.GET(test).then((res) => {
-      debugger
-    })
-    return
+    var target = this.data.dataSource[index].target;
+    var {
+      id,
+      type
+    } = target;
+    var url = "";
+    if (type == "answer") {
+      url = `../answer/answer?id=${id}&type=${type}`
+    } else if (type == "article") {
+      url = `../answers/answers?id=${id}&type=${type}`
+
+    }
     wx.navigateTo({
-      url: `../answer/answer?id=${id}`,
+      url
+    })
+  },
+  getDataSource(tid) {
+    var {
+      activeIndex,
+      narbar
+    } = this.data;
+    var narbarItem = narbar[activeIndex];
+    var {
+      type,
+      datasourceId
+    } = narbarItem;
+    var topicsUrl = `https://www.zhihu.com/api/v4/topics/${tid}/feeds/${type}?include=data[*]&limit=20`;
+    api.GET(topicsUrl).then((res) => {
+      console.log(res)
+      var dataSource = res.data;
+      var dataSourceKey = "dataSource." + datasourceId;
+
+      this.setData({
+        "dataSource.activityDataSource": dataSource
+      })
+      var that = this;
+      dataSource.forEach((item, index) => {
+        var content = item["target"]["excerpt"];
+        util.formatWxParse(WxParse, dataSource, content, index, that);
+      })
+      var dd = this.data;
     })
   },
   /**
@@ -37,28 +161,20 @@ Page({
    */
   onLoad: function(options) {
     var tid = options.id;
-    if(!tid)//test
-   tid = "19629946";
-    var topicUrl = `https://www.zhihu.com/api/v4/topics/${tid}`;
-    var topicsUrl = `https://www.zhihu.com/api/v4/topics/${tid}/feeds/essence`;
+    if (!tid) //test
+      tid = "19629946";
+    this.getDataSource(tid);
+
+
+    //var topicUrl = `https://www.zhihu.com/api/v4/topics/${tid}`;
+    //   var topicsUrl = `https://www.zhihu.com/api/v4/topics/${tid}/feeds/essence`;
     var test4 = "https://www.zhihu.com/api/v4/topics/19629946/feeds/top_activity?include=data[*]&limit=20";
-    api.GET(test4).then((res) => {
-      console.log(res)
-      var dataSource = res.data;
-      this.setData({
-        dataSource
-      })
-      var that = this;
-      dataSource.forEach((item, index) => {
-        var content = item["target"]["excerpt"];
-        util.formatWxParse(WxParse, dataSource, content, index, that);
-      })
 
 
 
-    })
-
-
+    this.setData({
+      clientHeight: getApp().globalData.systemInfo.windowHeight - 30 //scroll-view内容的高度等于 设备的高度 - tab标题高度
+    });
   },
 
   /**

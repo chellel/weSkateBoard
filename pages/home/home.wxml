@@ -39,13 +39,15 @@
                   </view>
                   <view class='weui-media-box__desc'>
                     <view class="weui-media-box__info">
-                      <view class="weui-media-box__info__meta">关注者</view>
-                      <view class="weui-media-box__info__meta">{{topicInfo.followers_count}}</view>
-                      <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">问题数</view>
-                      <view class="weui-media-box__info__meta">{{topicInfo.questions_count}}</view>
+                      <view class="weui-media-box__info__meta">关注者 {{topicInfo.followers_count}}</view>
+                      
+                      <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">问题数 {{topicInfo.questions_count}}</view>
+                    
                     </view>
                   </view>
                 </view>
+                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+
               </view>
             </navigator>
 
