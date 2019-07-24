@@ -15,7 +15,7 @@
 
 .weui-panel__hd {
   color: #000;
-  padding:10px 5px;
+  padding: 10px 5px;
 }
 
 .weui-media-box {
@@ -32,41 +32,148 @@
   margin-bottom: 15px;
 }
 
-
 .weui-media-box__info__meta icon {
   margin-right: 2px;
 }
-.weui-media-box__info__button::after{
+
+.weui-media-box__info__button::after {
   border: none;
 }
-.weui-media-box__info__button{
-display:inline-block;
-display:flex;
-font-size:12px;
-line-height:40px;
-height:40px;
-border:none!important;
-background:rgba(0,132,255,.1);
 
+.weui-media-box__info__button {
+  display: inline-block;
+  display: flex;
+  font-size: 12px;
+  line-height: 40px;
+  height: 40px;
+  border: none !important;
+  background: rgba(0, 132, 255, 0.1);
 }
-.weui-media-box__info__button{
-  background: rgba(0,132,255,.1);
-   color: #0084ff;
-   padding:0px 10px;
 
+.weui-media-box__info__button {
+  background: rgba(0, 132, 255, 0.1);
+  color: #0084ff;
+  padding: 0px 10px;
 }
-.weui-media-box__info__meta__star{
-   color: #0084ff;
 
+.weui-media-box__info__meta__star {
+  color: #0084ff;
 }
-.weui-media-box__info__meta__star:active{
+
+.weui-media-box__info__meta__star:active {
   opacity: 0.6;
 }
-.weui-media-box__info__button__active{
-background: #0084ff;
-color:#fff;
+
+.weui-media-box__info__button__active {
+  background: #0084ff;
+  color: #fff;
 }
-.weui-media-box__info__button:active{
-background: #9ed2fd;
-color: #fff;
+
+.weui-media-box__info__button:active {
+  background: #9ed2fd;
+  color: #fff;
+}
+
+.content__hd {
+  background: #0084ff;
+  color: #fff;
+  display: block;
+  padding: 12px 0;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+.content__hd .content__title {
+  font-size: 16px;
+}
+
+.content__card {
+  position: relative;
+  background: #fff;
+  width: 86%;
+  height: 70px;
+  left: 6%;
+  box-shadow: 2px 2px 10px 0px #ccc;
+  display: flex;
+  align-items: center;
+}
+
+.content__card .weui-panel__hd {
+  height: 100%;
+  padding: 0;
+}
+
+.weui-panel__content {
+  margin-top: 5px;
+}
+
+.content__card .weui-media-box__bd {
+  max-height: 60px;
+  overflow: hidden;
+}
+
+.content__card .weui-media-box__thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.content__card .weui-media-box__avatorbox {
+  margin-right: 0.3em;
+}
+
+.weui-media-box__button {
+  margin: 0 5px;
+}
+
+.weui-media-box__button button {
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #0084ff;
+  border: 1px solid #0084ff;
+}
+
+.weui-media-box__button button.active {
+  color: #fff;
+  background: #0084ff;
+}
+
+.weui-media-box__button button:active {
+  opacity: 0.6;
+}
+
+.content__card .weui-media-box__title {
+  font-size: 14px;
+}
+
+.content__card .weui-media-box__title:active {
+  color: #000;
+}
+
+.content__card .weui-media-box__desc {
+  font-size: 12px;
+}
+
+.content__card .weui-media-box {
+  width: 100%;
+}
+
+.content__card__all {
+  position: relative;
+}
+.content__card:active .weui-media-box__avatorbox,
+.content__card:active .weui-media-box__bd{
+  opacity: 0.6;
+}
+
+.content__card__all .bg-half {
+  background: #0084ff;
+  height: 30px;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }

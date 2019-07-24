@@ -2,24 +2,31 @@
 <import src="/templates/wePanel/wePanel.wxml" />
 <import src="/utils/wxParse/wxParse.wxml" />
 <view class="weui-tab">
-<!-- narbar start -->
+  <!-- narbar start -->
   <view class="weui-narbar">
-    <block wx:for-items="{{narbar}}" wx:key="index" wx:for-index="index">
+    <block wx:for-items="{{narbar}}" wx:key="id" wx:for-index="index">
       <button class="weui-narbar__button {{activeIndex==index?'weui-narbar__button__active':''}}" current="{{activeIndex}}" data-index="{{index}}" bindtap="switchNav">{{item.title}}</button>
     </block>
   </view>
-<!-- narbar end -->
+  <!-- narbar end -->
 
-<!-- swiper start -->
+  <!-- swiper start -->
   <swiper current="{{activeIndex}}" class="swiper-box " duration="200" bindchange="switchTab" style="height: {{clientHeight}}px">
     <swiper-item class="swiper-item" wx:for-items="{{narbar}}" wx:for-item='tabitem' wx:key="id" wx:index="index">
-      <scroll-view scroll-y="true" class="scoll-h" style="height: {{clientHeight}}px">
-       
-          <view class='weui-panel weui-panel-multi' wx:for="{{dataSource.activityDataSource}}" wx:for-item="item" wx:for-index="index">
-            <template is="wePanel" data="{{...item.target,index,wxParseTemArray:contentArray,showTitle:true}}"></template>
-          </view>
+      <scroll-view scroll-y="true" class="scoll-h" style="height: {{clientHeight}}px" bindscrolltolower="onScrollReachBottom">
+
+        <view class='weui-panel weui-panel-multi' wx:for="{{dataSource[tabitem.datasourceId]}}" wx:key="id" wx:for-item="item" wx:for-index="index">
+        <block wx:if="{{tabitem.type=='top_activity'}}">
+          <template is="wePanel" data="{{...item.target,index,wxParseTemArray:activityArray,showTitle:true}}"></template>
+
+        </block>
+        <block wx:elif="{{tabitem.type=='essense'}}">
+          <template is="wePanel" data="{{...item.target,index,wxParseTemArray:essenseArray,showTitle:true}}"></template>
+          </block>
+        </view>
+
       </scroll-view>
     </swiper-item>
   </swiper>
-<!-- swiper end -->
+  <!-- swiper end -->
 </view>

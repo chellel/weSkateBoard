@@ -148,6 +148,7 @@ view, scroll-view {
 
 .weui-cell__ft {
   display: flex;
+justify-content:flex-end;
 }
 
 .weui-cell__ft icon {

@@ -9,11 +9,16 @@ Page({
   data: {
     dataSource: {},
     isVoteUp: false,
-    isStar:false
+    isStar:false,
+    isFollow:false
 
   },
   VoteUp() {
-    var currVoteUp = this.data.isVoteUp;
+    wx.showToast({
+      title: this.data.isVoteUp ? "取消赞同" : "已赞同",
+      icon: this.data.isVoteUp ? "none" : ""
+    })
+     var currVoteUp = this.data.isVoteUp;
     currVoteUp ? this.data.dataSource.voteup_count-- : this.data.dataSource.voteup_count++;
     this.setData({
       isVoteUp: !currVoteUp,
@@ -21,8 +26,23 @@ Page({
     })
   },
   Star(){
+    wx.showToast({
+      title: this.data.isStar ? "取消收藏" : "已收藏",
+      icon: this.data.isStar ? "none" : ""
+    })
     this.setData({
       isStar:!this.data.isStar
+    })
+  },
+  /**关注 */
+  Follow(){
+
+    wx.showToast({
+      title: this.data.isFollow ? "取消关注" :"已关注",
+      icon: this.data.isFollow ? "none" : ""
+    })
+    this.setData({
+      isFollow: !this.data.isFollow
     })
   },
   /**
@@ -30,7 +50,8 @@ Page({
    */
   onLoad: function(options) {
     var aid = options.id;
-   // aid = "215782465"; //test
+    if(!aid)
+    aid = "215782465"; //test
    
     utils.getAnswer(aid, (data) => {
       console.log(data)
@@ -39,7 +60,6 @@ Page({
       })
       var that = this;
       var content = this.data.dataSource.content;
-      debugger
       WxParse.wxParse('content', 'html', content, that, 5);
 
     });

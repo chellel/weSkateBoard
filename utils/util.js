@@ -39,7 +39,6 @@ const getTrickById = function(callback) {
 
 const getAnswer = function(aid, callback) {
   // var aid = "445326904";
-  debugger
   var aUrl = `https://www.zhihu.com/api/v4/answers/${aid}?include=data[*].is_normal,suggest_edit,comment_count,collapsed_counts,reviewing_comments_count,can_comment,content,voteup_count,reshipment_settings,comment_permission,mark_infos,created_time,updated_time,relationship.voting,is_author,is_thanked,is_nothelp,upvoted_followees;data[*].author.badge[?(type=best_answerer)].topics].topics)`;
   api.GET(aUrl).then((res) => {
     callback(res);
@@ -47,11 +46,18 @@ const getAnswer = function(aid, callback) {
 }
 
 
-function formatWxParse(WxParse, dataSource, content, index,that) {
-    WxParse.wxParse("content" + index, 'html', content, that)
+function formatWxParse(WxParse, dataSource, content, index, that, bindName="content",wxParseTemArrayName="contentArray") {
+  WxParse.wxParse(bindName + index, 'html', content, that)
+  var d = that.data;
+  debugger
     if (index == dataSource.length - 1) {
-      WxParse.wxParseTemArray("contentArray", "content", dataSource.length, that)
+      WxParse.wxParseTemArray(wxParseTemArrayName, bindName, dataSource.length, that)
+      for (var i=0;i<dataSource.length-1;i++){
+        delete that.data[bindName+i];
+      }
+     
     }
+ 
 
 }
 

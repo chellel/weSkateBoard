@@ -16,7 +16,7 @@ justify-content: center;
 color: #ed1b24;
 background: none;
 margin: 0;
-font-size: 16px;
+font-size: 14px;
 
 }
 .weui-narbar__button:first-child{
@@ -33,4 +33,10 @@ opacity: 0.6;
 
 .weui-narbar__button::after {
   border: none;
+}
+
+
+.weui-panel__bd .weui-media-box__title,.weui-panel__bd .weui-media-box__desc{
+  text-align:left;
+
 }

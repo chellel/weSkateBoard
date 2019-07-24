@@ -9,6 +9,7 @@ const http=({
       data:params,
       ...other,
       success:res=>{
+        wx.hideLoading();
         resolve(res.data);
       },
       fail:e=>{

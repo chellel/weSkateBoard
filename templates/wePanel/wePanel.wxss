@@ -46,3 +46,8 @@
 .weui-media-box__info {
   color: #888;
 }
+
+.weui-panel-multi .weui-panel__hd:active{
+opacity: .6;
+color: #000;
+}

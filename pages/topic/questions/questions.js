@@ -2,6 +2,7 @@
 var api = require("../../../utils/api.js");
 var util = require("../../../utils/util.js");
 const WxParse = require("../../../utils/wxParse/wxParse.js");
+var tid;
 Page({
 
   /**
@@ -26,49 +27,50 @@ Page({
         title: "讨论",
         slotname: "slot1",
         type: "top_activity",
-        datasourceId: "activityDataSource"
+        datasourceId: "activityDataSource",
+      wxParseTemArrayName:"activityArray",
+        currentPage: 0, //当前起始筛选条数
+
+        isRender: false
       },
       {
         title: "精华",
         slotname: "slot2",
         type: "essence",
-        datasourceId: "essenceDataSource"
+        datasourceId: "essenceDataSource",
+        wxParseTemArrayName: "essenseArray",
+        currentPage: 0, //当前起始筛选条数
+        isRender: false
 
-      }
-    ]
+
+      }],
+    activityArray: [],
+    essenseArray: []
   },
   /**切换tab导航标题 */
   switchNav: function(e) {
     var that = this;
-    var idIndex = e.currentTarget.dataset.index;
-    if (this.data.activeIndex === idIndex) {
+    var activeIndex = e.currentTarget.dataset.index;
+    if (this.data.activeIndex === activeIndex) {
       return false
     } else {
-      var offsetW = e.currentTarget.offsetLeft; //2种方法获取距离文档左边有多少距离
       this.setData({
-        activeIndex: idIndex,
-        slideOffset: offsetW
+        activeIndex
       });
     }
   },
   /**切换tab内容 */
   switchTab: function(e) {
     // swiper组件绑定change事件tabChange，通过e.detail.current拿到当前页
-    var current = e.detail.current;
-    if ((current + 1) % 4 == 0) {}
+    var activeIndex = e.detail.current;
+
     this.setData({
-      activeIndex: current
+      activeIndex
     });
     this.checkCor();
-    /*    var dataSource = this.data.dataSource;
+    if (!this.data.narbar[activeIndex].isRender)
+      this.getDataSource(activeIndex);
 
-      var dataItems = dataSource[current].items;
-      var data = {
-        current: current,
-        items: dataItems
-      } 
-      this.triggerEvent('changeEvent', data) //changeEvent自定义事件的名称
-*/
   },
   //判断当前滚动超过一屏时，设置tab标题滚动条。
   checkCor: function() {
@@ -91,12 +93,6 @@ Page({
     });
   },
 
-  _onItemClick: function(e) {
-    var data = e.currentTarget.dataset.data;
-    this.triggerEvent("onItemClick", {
-      data: data.detail
-    })
-  },
 
   onTitleClick(e) {
     var index = e.currentTarget.dataset.index;
@@ -113,7 +109,12 @@ Page({
   },
   onItemClick(e) {
     var index = e.currentTarget.dataset.index;
-    var target = this.data.dataSource[index].target;
+    var {
+      activeIndex,
+      narbar
+    } = this.data;
+    var datasourceId = narbar[activeIndex].datasourceId;
+    var target = this.data.dataSource[datasourceId][index].target;
     var {
       id,
       type
@@ -129,51 +130,107 @@ Page({
       url
     })
   },
-  getDataSource(tid) {
-    var {
-      activeIndex,
-      narbar
-    } = this.data;
+  getDataSource(activeIndex) {
+
+    wx.showLoading({
+      title: '加载中...',
+    })
+    var limit = 5; //每次加载页面数据条数
+    var narbar = this.data.narbar;
     var narbarItem = narbar[activeIndex];
     var {
       type,
-      datasourceId
+      datasourceId,
+      wxParseTemArrayName
     } = narbarItem;
-    var topicsUrl = `https://www.zhihu.com/api/v4/topics/${tid}/feeds/${type}?include=data[*]&limit=20`;
+    var topicsUrl = ``;
+
+    var paging = narbar[activeIndex].paging;
+    if (paging != undefined) {
+      debugger
+      if (paging.is_end) {
+        wx.showToast({
+          title: '到底啦',
+        })
+        return
+      }
+      topicsUrl = paging.next;
+    } else {
+      topicsUrl = `https://www.zhihu.com/api/v4/topics/${tid}/feeds/${type}?include=data[*]&limit=${limit}&offset=0`;
+      if (type == "active_activity")
+        topicsUrl + "&after_id=0";
+    }
+    //https://www.zhihu.com/api/v4/topics/19629946/feeds/top_activity?include=data[*]&limit=5&after_id=5589.15728
+    console.log(topicsUrl)
     api.GET(topicsUrl).then((res) => {
       console.log(res)
       var dataSource = res.data;
-      var dataSourceKey = "dataSource." + datasourceId;
+      // var dataSourceKey = "dataSource." + datasourceId;
+      var dataTemp = {};
+      var currDataSource = this.data.dataSource[datasourceId];
 
-      this.setData({
-        "dataSource.activityDataSource": dataSource
-      })
+      if (datasourceId == "activityDataSource") {
+        var dataSourceTemp = dataSource.filter((item) => { //由于无法得知article文章的api，暂时过滤
+          if (item.target.type != "article")
+            return item;
+        })
+        dataSourceTemp = [...dataSource];
+        if (Array.isArray(currDataSource)) {
+          dataSourceTemp = [...currDataSource, ...dataSourceTemp];
+        }
+        dataTemp = {
+          "dataSource.activityDataSource": dataSourceTemp
+        };
+      } else if (datasourceId == "essenceDataSource") {
+        if (Array.isArray(currDataSource)) {
+          dataSource = [...currDataSource, ...dataSource];
+        }
+        dataTemp = {
+          "dataSource.essenceDataSource": dataSource
+        };
+      }
+      narbar[activeIndex].isRender = true;
+      narbar[activeIndex].currentPage = narbarItem.currentPage + limit;
+      narbar[activeIndex].paging = res.paging;
+
+      Object.assign(dataTemp, {
+        narbar
+      });
+      this.setData(dataTemp)
       var that = this;
-      dataSource.forEach((item, index) => {
+      this.data.dataSource[datasourceId].forEach((item, index) => {
+        var d = this.data[wxParseTemArrayName].length - 1;
+        debugger
+        if (index<this.data[wxParseTemArrayName].length-1)
+           return
+       // var content = item["content"];
         var content = item["target"]["excerpt"];
-        util.formatWxParse(WxParse, dataSource, content, index, that);
+        util.formatWxParse(WxParse, that.data.dataSource[datasourceId], content, index, that, type,wxParseTemArrayName);
       })
-      var dd = this.data;
+    
     })
+    var d = this.data;
+
+    console.log(d)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var tid = options.id;
+    tid = options.id;
     if (!tid) //test
       tid = "19629946";
-    this.getDataSource(tid);
+    this.getDataSource(this.data.activeIndex);
 
 
     //var topicUrl = `https://www.zhihu.com/api/v4/topics/${tid}`;
     //   var topicsUrl = `https://www.zhihu.com/api/v4/topics/${tid}/feeds/essence`;
     var test4 = "https://www.zhihu.com/api/v4/topics/19629946/feeds/top_activity?include=data[*]&limit=20";
-
+    var d = getApp().globalData.systemInfo.windowHeight - 30;
 
 
     this.setData({
-      clientHeight: getApp().globalData.systemInfo.windowHeight - 30 //scroll-view内容的高度等于 设备的高度 - tab标题高度
+      clientHeight: getApp().globalData.systemInfo.windowHeight //scroll-view内容的高度等于 设备的高度 - tab标题高度
     });
   },
 
@@ -212,6 +269,10 @@ Page({
 
   },
 
+  onScrollReachBottom() {
+    console.log("onReachBottom")
+    this.getDataSource(this.data.activeIndex);
+  },
   /**
    * 页面上拉触底事件的处理函数
    */
