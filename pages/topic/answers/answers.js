@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+contentArray:[]
   },
 
   onItemClick(e) {
@@ -51,8 +51,10 @@ Page({
         paging: res.paging
       })
       var that = this;
+    var  wxParseTemArrayName="contentArray";
       dataSource.forEach((item, index) => {
-        if (this.data["content" + index])
+        
+        if (index < this.data[wxParseTemArrayName].length)
           return
         var content = item["content"];
         util.formatWxParse(WxParse, dataSource, content, index, that);

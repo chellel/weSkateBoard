@@ -126,17 +126,20 @@ function wxAutoImageCal(originalWidth, originalHeight,that,bindName) {
   return results;
 }
 
-function wxParseTemArray(temArrayName,bindNameReg,total,that){
+function wxParseTemArray(temArrayName,bindNameReg,startIndex,total,that){
   var array = [];
   var temData = that.data;
   var obj = null;
-  for(var i = 0; i < total; i++){
+  for (var i = startIndex; i < total; i++){
     var simArr = temData[bindNameReg+i].nodes;
     array.push(simArr);
   }
 
   temArrayName = temArrayName || 'wxParseTemArray';
   obj = JSON.parse('{"'+ temArrayName +'":""}');
+  var currArrayData = that.data[temArrayName];
+  if (Array.isArray(currArrayData))
+    array=[...currArrayData,...array];
   obj[temArrayName] = array;
   that.setData(obj);
 }

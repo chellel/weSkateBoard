@@ -30,22 +30,24 @@ Page({
         datasourceId: "activityDataSource",
       wxParseTemArrayName:"activityArray",
         currentPage: 0, //当前起始筛选条数
-
-        isRender: false
+        isRender: false,
+      isLoading: false,
+      paging:{}
       },
       {
         title: "精华",
         slotname: "slot2",
         type: "essence",
         datasourceId: "essenceDataSource",
-        wxParseTemArrayName: "essenseArray",
+        wxParseTemArrayName: "essenceArray",
         currentPage: 0, //当前起始筛选条数
-        isRender: false
-
+        isRender: false,
+        isLoading:false,
+        paging: {}
 
       }],
     activityArray: [],
-    essenseArray: []
+    essenceArray: [],
   },
   /**切换tab导航标题 */
   switchNav: function(e) {
@@ -67,25 +69,10 @@ Page({
     this.setData({
       activeIndex
     });
-    this.checkCor();
     if (!this.data.narbar[activeIndex].isRender)
       this.getDataSource(activeIndex);
 
   },
-  //判断当前滚动超过一屏时，设置tab标题滚动条。
-  checkCor: function() {
-    if (this.data.activeIndex > 2) {
-
-      this.setData({
-        scrollLeft: 300
-      })
-    } else {
-      this.setData({
-        scrollLeft: 0
-      })
-    }
-  },
-
   tabClick: function(e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
@@ -131,23 +118,19 @@ Page({
     })
   },
   getDataSource(activeIndex) {
-
-    wx.showLoading({
-      title: '加载中...',
-    })
-    var limit = 5; //每次加载页面数据条数
+   
     var narbar = this.data.narbar;
     var narbarItem = narbar[activeIndex];
+   
     var {
       type,
       datasourceId,
-      wxParseTemArrayName
+      wxParseTemArrayName,
+      paging
     } = narbarItem;
-    var topicsUrl = ``;
-
-    var paging = narbar[activeIndex].paging;
-    if (paging != undefined) {
-      debugger
+    
+    var topicsUrl = "";
+    if (Object.keys(paging).length > 0) {//判断paging不为空
       if (paging.is_end) {
         wx.showToast({
           title: '到底啦',
@@ -160,21 +143,27 @@ Page({
       if (type == "active_activity")
         topicsUrl + "&after_id=0";
     }
-    //https://www.zhihu.com/api/v4/topics/19629946/feeds/top_activity?include=data[*]&limit=5&after_id=5589.15728
-    console.log(topicsUrl)
+    var limit = 5; //每次加载页面数据条数
+
+    
+  //  console.log(topicsUrl)//https://www.zhihu.com/api/v4/topics/19629946/feeds/top_activity?include=data[*]&limit=5&after_id=5589.15728
+    wx.showLoading({
+      title: '加载中...',
+    })
+ 
+    this.changeLoadmoreStatus(narbar, narbarItem, "isLoading", true);
     api.GET(topicsUrl).then((res) => {
-      console.log(res)
+    this.changeLoadmoreStatus(narbar,narbarItem,"isLoading",false);
       var dataSource = res.data;
       // var dataSourceKey = "dataSource." + datasourceId;
       var dataTemp = {};
       var currDataSource = this.data.dataSource[datasourceId];
-
       if (datasourceId == "activityDataSource") {
         var dataSourceTemp = dataSource.filter((item) => { //由于无法得知article文章的api，暂时过滤
           if (item.target.type != "article")
             return item;
         })
-        dataSourceTemp = [...dataSource];
+      //  dataSourceTemp = [...dataSource];
         if (Array.isArray(currDataSource)) {
           dataSourceTemp = [...currDataSource, ...dataSourceTemp];
         }
@@ -189,9 +178,9 @@ Page({
           "dataSource.essenceDataSource": dataSource
         };
       }
-      narbar[activeIndex].isRender = true;
-      narbar[activeIndex].currentPage = narbarItem.currentPage + limit;
-      narbar[activeIndex].paging = res.paging;
+      narbarItem.isRender = true;
+      narbarItem.currentPage = narbarItem.currentPage + limit;
+      narbarItem.paging = res.paging;
 
       Object.assign(dataTemp, {
         narbar
@@ -199,19 +188,26 @@ Page({
       this.setData(dataTemp)
       var that = this;
       this.data.dataSource[datasourceId].forEach((item, index) => {
-        var d = this.data[wxParseTemArrayName].length - 1;
-        debugger
-        if (index<this.data[wxParseTemArrayName].length-1)
+        if (index<this.data[wxParseTemArrayName].length)
            return
        // var content = item["content"];
         var content = item["target"]["excerpt"];
         util.formatWxParse(WxParse, that.data.dataSource[datasourceId], content, index, that, type,wxParseTemArrayName);
       })
-    
+    }).catch(()=>{
+      var narbar = this.data.narbar;
+      var narbarItem = narbar[activeIndex];
+      narbarItem.isLoading = false;
+      this.setData({
+        narbar
+      })
     })
-    var d = this.data;
-
-    console.log(d)
+  },
+  changeLoadmoreStatus(narbar,narbarItem,key,value){
+    narbarItem[key] = value;
+    this.setData({
+      narbar
+    })
   },
   /**
    * 生命周期函数--监听页面加载

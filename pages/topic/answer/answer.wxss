@@ -135,6 +135,7 @@
   padding-right: 10px;
   color: #0084ff;
   border: 1px solid #0084ff;
+  background-color: none;
 }
 
 .weui-media-box__button button.active {

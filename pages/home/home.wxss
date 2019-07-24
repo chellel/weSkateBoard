@@ -171,5 +171,8 @@ justify-content:flex-end;
 }
 
 .weui-cell__ft_in-access {
-  padding-right: 30px;
+  margin-right: 15px;
+}
+.swiper-item .weui-media-box__bd{
+  width:100%;
 }

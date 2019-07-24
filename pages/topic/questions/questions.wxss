@@ -11,7 +11,7 @@ justify-content: center;
   width: 100px;
   height: 30px;
   line-height: 30px;
-  border-radius:2px ;
+  border-radius:0 ;
   border: solid 1px #ed1b24;
 color: #ed1b24;
 background: none;
@@ -40,3 +40,4 @@ opacity: 0.6;
   text-align:left;
 
 }
+
