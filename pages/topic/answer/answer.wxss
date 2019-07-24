@@ -178,3 +178,9 @@
   top: 0;
   width: 100%;
 }
+.weui-media-box__time{
+color: #888;
+font-size: 12px;
+text-align: right;
+
+}

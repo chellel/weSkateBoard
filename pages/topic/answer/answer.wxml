@@ -28,6 +28,11 @@
 
   <view class="weui-panel__bd weui-panel__content">
     <view class="weui-media-box">
+<view class="weui-media-box__time">
+{{dataSource.created_time_format}}
+</view>
+
+
       <view class="weui-media-box__content">
         <template is="wxParse" data="{{wxParseData:content.nodes}}" />
       </view>

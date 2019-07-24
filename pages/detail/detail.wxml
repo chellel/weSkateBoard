@@ -22,9 +22,9 @@
 
     </view>
     <view class="weui-media-box__info">
-      <view class="weui-media-box__info__meta">文字来源</view>
+      <view class="weui-media-box__info__meta">编辑时间</view>
       <view class="weui-media-box__info__meta">2019-07-21</view>
-      <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+      
     </view>
   </view>
 

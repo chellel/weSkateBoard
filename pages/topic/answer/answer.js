@@ -19,10 +19,12 @@ Page({
       icon: this.data.isVoteUp ? "none" : ""
     })
      var currVoteUp = this.data.isVoteUp;
-    currVoteUp ? this.data.dataSource.voteup_count-- : this.data.dataSource.voteup_count++;
+    var dataSource = this.data.dataSource;
+    currVoteUp ? dataSource.voteup_count-- : dataSource.voteup_count++;
+   
     this.setData({
       isVoteUp: !currVoteUp,
-      dataSource: this.data.dataSource
+      dataSource
     })
   },
   Star(){
@@ -55,6 +57,7 @@ Page({
    
     utils.getAnswer(aid, (data) => {
       console.log(data)
+      data.created_time_format = new Date(data.created_time).toLocaleString();
       this.setData({
         dataSource: data
       })
