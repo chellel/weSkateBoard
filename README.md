@@ -9,12 +9,12 @@
 
 <img src="https://github.com/chellel/weSkateBoard/blob/master/demo/onSkate_wechat.png" alt="二维码" width="250" />
 
-## 样式
+### 样式
 
 
 样式使用小程序官方WeUI基础样式库,同微信原生视觉体验一致,用户的使用感知更加统一。
 
-## 后台数据
+### 后台数据
 
 1、因服务器方面原因，本项目着重小程序方面的开发，后台数据使用easy mock————可视化，并且能快速生成模拟数据的服务，让前后端分离。后期如接口完成情况下，只需要改变url地址即可用。
 
