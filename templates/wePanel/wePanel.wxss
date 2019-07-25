@@ -25,6 +25,9 @@
 .weui-panel:after {
   left: 15px;
 }
+weui-panel:first-child:after{
+  display: none;
+}
 
 .weui-panel {
   margin-top: 0;

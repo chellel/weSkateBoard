@@ -2,8 +2,8 @@
   "pages": [
     "pages/home/home",
     "pages/topic/questions/questions",
-    "pages/topic/answer/answer",
     "pages/topic/answers/answers",
+    "pages/topic/answer/answer",
     "pages/detail/detail",
     "pages/discover/discover",
     "pages/index/index",
