@@ -2,6 +2,8 @@
 微信小程序 滑板
 出于对小程序的好奇和熟悉小程序的api，开发的项目。因个人近期对滑板产生浓烈的兴趣，因此小程序的内容主要对滑板进行知识的讲解和滑板动作的解析，以及近期滑板的动态。
 
+![image](https://github.com/chellel/weSkateBoard/blob/master/demo/onSkate.png)
+
 样式
 
 
