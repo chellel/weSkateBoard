@@ -1,7 +1,6 @@
 <!--pages/topic/answers/answers.wxml-->
 <import src="../../../templates/wePanel/wePanel.wxml" />
 <import src="/templates/loadmore/loadmore.wxml" />
-<import src="/utils/wxParse/wxParse.wxml" />
 
 <view class="page">
 

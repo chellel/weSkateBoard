@@ -64,9 +64,7 @@ Page({
       var that = this;
       var content = this.data.dataSource.content;
       WxParse.wxParse('content', 'html', content, that, 5);
-
     });
-
   },
 
   /**

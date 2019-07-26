@@ -1,0 +1,128 @@
+/* pages/search/searchBar/searchBar.wxss */
+
+page,.page{
+  height: 100%;
+ /* background: #efeff4;*/
+}
+
+.page-bg{
+  background: #f2f2f2;
+height: 100%;
+}
+.weui-search-bar{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border:none;
+  background-color: #fff;
+}
+.weui-search-bar__form{
+  background: none;
+}
+.weui-search-bar__box{
+  background: #efeff4;
+}
+.weui-content{
+  padding: 10px;
+}
+.weui-content__title{
+  font-size:12px;
+  font-weight: 600;
+}
+.weui-footer{
+  bottom: 0;
+position: absolute;
+width: 100%;
+margin: 10px 0;
+
+}
+.weui-content,.weui-tag-content{
+margin: 10px 0;
+}
+.weui-tag{
+  display: inline-block;
+padding: 3px 10px;
+margin-right: 10px;
+line-height: normal;
+border-radius: 2px;
+font-size: 11px;
+background: #ccc;
+color: #fff;
+}
+
+.weui-tag:active{
+  opacity: 0.7;
+  background-color: #ed1b24;
+}
+
+.weui-search-bar__cancel-btn{
+font-size: 14px;
+color: #000;
+
+ -webkit-transition: opacity .3s ease,-webkit-transform .3s ease;
+    transition: opacity .3s ease,-webkit-transform .3s ease;
+    transition: opacity .3s ease,transform .3s ease;
+    transition: opacity .3s ease,transform .3s ease,-webkit-transform .3s ease;
+
+}
+
+.weui-search-bar__cancel-btn:active{
+opacity: 0.6;
+}
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
+}
+
+
+.searchbar-result .weui-cell__bd{
+padding: 10px;
+}
+.weui-cells.searchbar-result{
+  margin-top: 0;
+  font-size: 12px;
+}
+.weui-cells.searchbar-result::before,.weui-cells.searchbar-result::after {
+  border: none;
+}
+.searchbar-result .weui-cell__bd:active{
+  background-color: #f2f2f2;
+}

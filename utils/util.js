@@ -46,6 +46,7 @@ const getAnswer = function(aid, callback) {
 }
 
 
+
 function formatWxParse(WxParse, dataSource, content, index, that, bindName="content",wxParseTemArrayName="contentArray") {
   WxParse.wxParse(bindName + index, 'html', content, that)
     if (index == dataSource.length - 1) {

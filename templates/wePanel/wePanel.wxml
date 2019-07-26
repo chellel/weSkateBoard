@@ -7,7 +7,7 @@
   <view class="weui-panel__bd">
     <view class="weui-media-box weui-media-box_text">
       <view wx:if="{{showTitle}}" class="weui-media-box__title weui-media-box__title_in-text" data-index="{{index}}" bindtap='onTitleClick'>
-        {{question.title}} </view>
+        {{question.title}}</view>
       <view class='weui-media-box__content' data-index="{{index}}" bindtap="onItemClick">
         <view class="weui-media-box__desc">
           <template is="wxParse" data="{{wxParseData:wxParseTemArray[index]}}" />
