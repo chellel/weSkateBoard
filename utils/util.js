@@ -49,9 +49,10 @@ const getAnswer = function(aid, callback) {
 
 function formatWxParse(WxParse, dataSource, content, index, that, bindName="content",wxParseTemArrayName="contentArray") {
   WxParse.wxParse(bindName + index, 'html', content, that)
+  var startIndex = that.data[wxParseTemArrayName].length;
     if (index == dataSource.length - 1) {
-      WxParse.wxParseTemArray(wxParseTemArrayName, bindName, that.data[wxParseTemArrayName].length, dataSource.length, that)
-      for (var i=0;i<dataSource.length;i++){
+      WxParse.wxParseTemArray(wxParseTemArrayName, bindName, startIndex, dataSource.length, that)
+      for (var i = startIndex;i<dataSource.length;i++){
         delete that.data[bindName+i];
       }
     }

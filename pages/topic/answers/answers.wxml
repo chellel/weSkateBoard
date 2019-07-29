@@ -5,9 +5,16 @@
 <view class="page">
 
   <view class="weui-panel weui-panel-multi" wx:for="{{dataSource}}" wx:for-item="item" wx:for-index="index" wx:key="item.id">
-    <template is="wePanel" data="{{...item,index,wxParseTemArray:contentArray,showTitle:false}}"></template>
+    <template is="wePanel" data="{{...item,index,wxParseTemArray:contentArray,wxParseIndex:index,showTitle:false}}"></template>
   </view>
   <template is="loadmore" wx:if="{{isLoading}}"></template>
 <template is="page-end" wx:if="{{paging.is_end}}"></template>
  
+<movable-area class="move">
+<movable-view class="corner-icon"  direction="vertical" style="pointer-events: auto;transform:translateX(200px) translateY(100px);">
+ <view bindtap="scrollToTop">
+ <view class="icon iconfont icon-top02"></view>
+ </view>
+</movable-view>
+</movable-area>
 </view>

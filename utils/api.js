@@ -10,10 +10,12 @@ const http=({
       ...other,
       success:res=>{
         wx.hideLoading();
+        wx.hideNavigationBarLoading()
         resolve(res.data);
       },
       fail:e=>{
         wx.hideLoading();
+        wx.hideNavigationBarLoading()
         wx.getNetworkType({
           success: function(res) {
             if(res.networkType=="none"){

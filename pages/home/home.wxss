@@ -172,7 +172,7 @@ justify-content:flex-end;
 }
 
 .weui-cell__ft_in-access {
-  margin-right: 15px;
+  margin-right: 0px;
 }
 .swiper-item .weui-media-box__bd{
   width:100%;

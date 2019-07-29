@@ -143,7 +143,7 @@ Page({
       if (type == "active_activity")
         topicsUrl + "&after_id=0";
     }
-    var limit = 5; //每次加载页面数据条数
+    var limit = 4; //每次加载页面数据条数
 
     
   //  console.log(topicsUrl)//https://www.zhihu.com/api/v4/topics/19629946/feeds/top_activity?include=data[*]&limit=5&after_id=5589.15728

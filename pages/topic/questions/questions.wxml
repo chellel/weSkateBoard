@@ -19,12 +19,12 @@
         <view class='weui-panel weui-panel-multi' wx:for="{{dataSource[tabitem.datasourceId]}}" wx:key="id" wx:for-item="item" wx:for-index="index">
           <!-- top_activity start -->
           <block wx:if="{{tabitem.type=='top_activity'}}">
-            <template is="wePanel" data="{{...item.target,index,wxParseTemArray:activityArray,showTitle:true}}"></template>
+            <template is="wePanel" data="{{...item.target,index,wxParseTemArray:activityArray,wxParseIndex:index,showTitle:true}}"></template>
           </block>
           <!-- top_activity end -->
           <!-- essence start -->
           <block wx:elif="{{tabitem.type=='essence'}}">
-            <template is="wePanel" data="{{...item.target,index,wxParseTemArray:essenceArray,showTitle:true}}"></template>
+            <template is="wePanel" data="{{...item.target,index,wxParseTemArray:essenceArray,wxParseIndex:index,showTitle:true}}"></template>
           </block>
           <!-- essence end -->
 

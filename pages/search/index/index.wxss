@@ -118,3 +118,7 @@ page {
 .weui-panel-index .weui-cell__bd {
   display: flex;
 }
+
+.weui-media-box .weui-media-box__bd{
+  width:100%;
+}

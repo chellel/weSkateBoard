@@ -42,7 +42,8 @@ App({
   globalData: {
     userInfo: null,
     message:{
-      noDataText:"暂无数据"
+      noDataText:"暂无数据",
+      loadingText:"加载中..."
     },
     systemInfo:null
   }

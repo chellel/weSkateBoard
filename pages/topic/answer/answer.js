@@ -1,4 +1,5 @@
 // pages/topic/answer/answer.js
+const api = require("../../../utils/api.js");
 const utils = require("../../../utils/util.js");
 const WxParse = require("../../../utils/wxParse/wxParse.js");
 Page({
@@ -47,24 +48,39 @@ Page({
       isFollow: !this.data.isFollow
     })
   },
+getDataSource(){
+  utils.getAnswer(this.aid, (data) => {
+    console.log(data)
+    data.created_time_format = new Date(data.created_time).toLocaleString();
+    this.setData({
+      dataSource: data
+    })
+    var that = this;
+    var content = this.data.dataSource.content;
+    WxParse.wxParse('content', 'html', content, that, 5);
+  });
+},
+
+  getComment() {
+    var limit = 10;
+    var url = `https://www.zhihu.com/api/v4/answers/${this.aid}/root_comments?order=normal&limit=${limit}&offset=0&status=open`;
+    api.GET(url).then((res)=>{
+  console.log(res)
+
+})
+
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var aid = options.id;
-    if(!aid)
-    aid = "215782465"; //test
-   
-    utils.getAnswer(aid, (data) => {
-      console.log(data)
-      data.created_time_format = new Date(data.created_time).toLocaleString();
-      this.setData({
-        dataSource: data
-      })
-      var that = this;
-      var content = this.data.dataSource.content;
-      WxParse.wxParse('content', 'html', content, that, 5);
-    });
+    this.aid = options.id;
+    if (!this.aid)
+      this.aid = "215782465"; //test
+    this.getDataSource();
+   this.getComment();
+
   },
 
   /**

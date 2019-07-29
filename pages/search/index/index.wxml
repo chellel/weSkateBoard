@@ -1,7 +1,10 @@
 <!--pages/search/index/index.wxml-->
 <import src="/templates/wePanel/wePanel.wxml" />
+<import src="/templates/loadmore/loadmore.wxml" />
 
-<view class="page"> 
+<view class="page">
+<!-- wiki_box start -->
+<block wx:if="{{topicInfo}}">
   <view class="weui-panel weui-box-panel">
     <view class="weui-media-box weui-media-box_text">
       <navigator url="../../topic/questions/questions?id={{topicInfo.id}}" hover-class="none">
@@ -38,40 +41,52 @@
     </view>
 
   </view>
-<view class="weui-panel weui-box-panel">
-  <view class="weui-panel__bd weui-panel-index">
-    <!-- content_essence_list start -->
-    <view class="weui-media-box weui-media-box_text" wx:for="{{topicInfo.content_essence_list}}" wx:for-index="index" wx:if="{{index<readIndex}}">
+  <!-- content_essence_list start -->
+  <block wx:if="{{topicInfo.content_essence_list}}">
+  <view class="weui-panel weui-box-panel">
+    <view class="weui-panel__bd weui-panel-index">
+      <!-- content_essence_list start -->
+      <view class="weui-media-box weui-media-box_text" wx:for="{{topicInfo.content_essence_list}}" wx:for-index="index" wx:key="id" wx:if="{{index<readIndex}}">
 
-      <view class="weui-media-box__title">{{item.title}}</view>
-      <!-- content_list start -->
-      <view class="weui-media-box__desc" wx:for="{{item.content_list}}" wx:for-item="content_list" data-id="{{content_list.id}}" bindtap="onContentListItemClick">
-        <view class="weui-media-box__desc__title"> {{content_list.title}} </view>
-        <view class="weui-cell__ft">{{content_list.discussion_count}} 讨论</view>
+        <view class="weui-media-box__title">{{item.title}}</view>
+        <!-- content_list start -->
+        <view class="weui-media-box__desc" wx:for="{{item.content_list}}" wx:for-item="content_list" wx:key="id" data-id="{{content_list.id}}" bindtap="onContentListItemClick">
+          <view class="weui-media-box__desc__title"> {{content_list.title}} </view>
+          <view class="weui-cell__ft">{{content_list.discussion_count}} 讨论</view>
+        </view>
+
+
+        <!-- content_list end -->
       </view>
 
-
-      <!-- content_list end -->
-    </view>
-
-    <!-- content_essence_list end -->
-    <view class="weui-panel__ft" bindtap="readIndexMore">
-      <view class="weui-cell weui-cell_access weui-cell_link">
-        <view class="weui-cell__bd">
-          <view class="weui-cell__text">
-            {{readIndexMore?"收起":"查看更多"}}
+      <!-- content_essence_list end -->
+      <view class="weui-panel__ft" bindtap="readIndexMore">
+        <view class="weui-cell weui-cell_access weui-cell_link">
+          <view class="weui-cell__bd">
+            <view class="weui-cell__text">
+              {{readIndexMore?"收起":"查看更多"}}
+            </view>
+            <icon class='icon iconfont icon-{{readMore?"Up":"Down"}}'></icon>
           </view>
-          <icon class='icon iconfont icon-{{readMore?"Up":"Down"}}'></icon>
         </view>
       </view>
+
     </view>
+  </view>
+  </block>
+  <!-- content_essence_list end -->
+
+</block>
+<!-- wiki_box end -->
+
+  <view class="weui-panel" wx:for="{{dataSource}}" wx:key="index">
+    <block wx:if="{{item.object.type=='answer'}}">
+      <template is="wePanel" data="{{...item.object,index,wxParseTemArray:contentArray,wxParseIndex:item.object.search_result_answer_index,showTitle:true}}"></template>
+    </block>
 
   </view>
-</view>
-<view class="weui-panel" wx:for="{{dataSource}}" wx:key="id">
-<block wx:if="{{item.object.type=='answer'}}"> 
-<template is="wePanel" data="{{...item.object,index:item.object.search_result_answer_index,wxParseTemArray:contentArray,showTitle:true}}"></template>
-</block>
+
+   <template is="loadmore" wx:if="{{isLoading}}"></template>
+<template is="page-end" wx:if="{{paging.is_end}}"></template>
  
-</view>
 </view>

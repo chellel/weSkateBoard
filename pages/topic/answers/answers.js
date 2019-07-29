@@ -25,7 +25,7 @@ Page({
     this.setData({
       isLoading:true
     })
-    var limit = 5;
+    var limit = 4;
 
     var url = `https://www.zhihu.com/api/v4/questions/${qId}/answers?include=data[*].is_normal,admin_closed_comment,reward_info,is_collapsed,annotation_action,annotation_detail,collapse_reason,is_sticky,collapsed_by,suggest_edit,comment_count,can_comment,content,editable_content,voteup_count,reshipment_settings,comment_permission,created_time,updated_time,review_info,relevant_info,question.detail,excerpt,relationship.is_authorized,is_author,voting,is_thanked,is_nothelp,is_labeled,is_recognized;data[].mark_infos[].url;data[].author.follower_count,badge[].topics&platform=desktop&sort_by=default`;
     var d = "297730641";
@@ -72,6 +72,11 @@ Page({
       })
     })
 
+  },
+  scrollToTop(){
+    wx.pageScrollTo({
+      scrollTop: 0,
+    })
   },
   /**
    * 生命周期函数--监听页面加载
