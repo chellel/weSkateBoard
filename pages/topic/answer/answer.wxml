@@ -3,8 +3,6 @@
 <view class='content'>
   <view class='content__hd'>
     <view class='content__title'>{{dataSource.question.title}}</view>
-
-
   </view>
   <view class='content__card__all'>
     <view class='bg-half'></view>

@@ -10,7 +10,10 @@ Page({
    */
   data: {
     contentArray: [],
-    isLoading: false
+    isLoading: false,
+    clientX: getApp().globalData.systemInfo.windowWidth - 40,
+    clientY: getApp().globalData.systemInfo.windowHeight - 80,
+    isHidden: true
   },
 
   onItemClick(e) {
@@ -23,7 +26,7 @@ Page({
   getDataSource() {
     wx.showNavigationBarLoading()
     this.setData({
-      isLoading:true
+      isLoading: true
     })
     var limit = 4;
 
@@ -46,8 +49,8 @@ Page({
       wx.hideNavigationBarLoading();
       this.setData({
         isLoading: false
-      }) 
-         console.log(res)
+      })
+      console.log(res)
       var dataSource = res.data;
       var currDataSource = this.data.dataSource;
       if (Array.isArray(currDataSource) && currDataSource.length > 0)
@@ -65,7 +68,7 @@ Page({
         var content = item["content"];
         util.formatWxParse(WxParse, dataSource, content, index, that);
       })
-    }).catch(e=>{
+    }).catch(e => {
       wx.hideNavigationBarLoading();
       this.setData({
         isLoading: false
@@ -73,9 +76,12 @@ Page({
     })
 
   },
-  scrollToTop(){
+  scrollToTop() {
     wx.pageScrollTo({
       scrollTop: 0,
+    })
+    this.setData({
+      isHidden: true
     })
   },
   /**
@@ -124,6 +130,29 @@ Page({
 
   },
 
+  onPageScroll: function(e) {
+    if (e.scrollTop > this.data.clientY) {
+      if (this.data.isHidden) {
+        this.setData({
+          isHidden: false
+        })
+        setTimeout(() => {
+          var animation = wx.createAnimation({})
+          animation.opacity(1).translateY(0).step();
+          this.setData({
+            animation: animation.export()
+          })
+        }, 0)
+      }
+
+    } else {
+     if(!this.data.isHidden)
+       this.setData({
+         isHidden: true
+       })
+    }
+  },
+
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -131,6 +160,12 @@ Page({
     if (this.data.paging.is_end)
       return
     this.getDataSource();
+
+
+
+
+
+
   },
 
   /**
