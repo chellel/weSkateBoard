@@ -12,9 +12,9 @@
   <!-- narbar end -->
 
   <!-- swiper start -->
-  <swiper current="{{activeIndex}}" class="swiper-box " duration="200" bindchange="switchTab" style="height: {{clientHeight}}px">
+  <swiper current="{{activeIndex}}" class="swiper-box" duration="200" bindchange="switchTab" style="height: {{clientHeight}}px">
     <swiper-item class="swiper-item" wx:for-items="{{narbar}}" wx:for-item='tabitem' wx:key="id" wx:index="index">
-      <scroll-view scroll-y="true" scroll-top="{{scrollTopNum}}" enable-back-to-top="true" class="scoll-h" style="height: {{clientHeight}}px" bindscrolltolower="onScrollReachBottom" bindscroll="onScroll">
+      <scroll-view scroll-y="true" scroll-with-animation="true" scroll-top="{{scrollTopNum}}" enable-back-to-top="true" class="scoll-h" style="height: {{clientHeight}}px" bindscrolltolower="onScrollReachBottom" bindscroll="onScroll">
 
         <view class='weui-panel weui-panel-multi' wx:for="{{dataSource[tabitem.datasourceId]}}" wx:key="id" wx:for-item="item" wx:for-index="index">
           <!-- top_activity start -->
