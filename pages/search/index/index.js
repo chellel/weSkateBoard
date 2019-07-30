@@ -13,7 +13,9 @@ Page({
     readMore: false,
     readIndexMore: false,
     readIndex: 1, //默认收起时只显示一行
-    isLoading: false
+    isLoading: false,
+    clientY: getApp().globalData.systemInfo.windowHeight - 80,
+
 
   },
   readMore() {
@@ -80,10 +82,11 @@ Page({
       var that = this;
       dataSource = handleHtml(dataSource, that);
 
-      /**替换文本中所有包含em的字符串 */
+      /**替换文本中所有包含em标签的字符串 */
       function replaceEM(item, content) {
         item[content] = item[content].replace(/<em>/g, '').replace(/<\/em>/g, '');
       }
+     
 
       function handleHtml(dataSource, that) {
         var search_result_answer_index = that.data.search_result_answer_index;
@@ -161,7 +164,7 @@ Page({
         dataSource,
         paging: res.paging
       })
-      console.log(dataSource)
+     // console.log(dataSource)
     }).catch(e => {
       this.setData({
         isLoading: false
@@ -176,7 +179,9 @@ Page({
     if (!q) { //test
       q = "滑板";
     }
+
     this.getDataSource(q);
+    this.scrollToTop = this.selectComponent("#scrollToTop");
   },
 
   /**
@@ -220,7 +225,9 @@ Page({
   onReachBottom: function() {
     this.getDataSource();
   },
-
+  onPageScroll: function (e) {
+    e.scrollTop > this.data.clientY*2 ? this.scrollToTop.show() : this.scrollToTop.hide();
+  },
   /**
    * 用户点击右上角分享
    */

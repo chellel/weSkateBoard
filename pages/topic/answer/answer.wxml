@@ -1,5 +1,7 @@
 <!--pages/topic/answer/answer.wxml-->
 <import src="/utils/wxParse/wxParse.wxml" />
+<import src="/templates/loadmore/loadmore.wxml" />
+
 <view class='content'>
   <view class='content__hd'>
     <view class='content__title'>{{dataSource.question.title}}</view>
@@ -21,7 +23,6 @@
         </view>
       </navigator>
     </view>
-
   </view>
 
   <view class="weui-panel__bd weui-panel__content">
@@ -30,10 +31,10 @@
         {{dataSource.created_time_format}}
       </view>
 
-
       <view class="weui-media-box__content">
         <template is="wxParse" data="{{wxParseData:content.nodes}}" />
       </view>
+
       <view class="weui-media-box__info">
         <view class="weui-media-box__info__meta weui-media-box__handlike">
           <button class='weui-media-box__info__button {{isVoteUp?"weui-media-box__info__button__active":""}}' bindtap='VoteUp'>
@@ -43,15 +44,74 @@
           </button>
         </view>
 
-        <view class="weui-media-box__info__meta">
-          <icon class='icon iconfont icon-message'></icon>
-          <view>{{dataSource.comment_count}}条评论</view>
-        </view>
         <view class="weui-media-box__info__meta weui-media-box__info__meta__star" bindtap='Star'>
           <icon class='icon iconfont icon-{{isStar?"star1":"starempty"}}'></icon>
           <view>{{isStar?"已收藏":"收藏"}}</view>
         </view>
       </view>
+
     </view>
   </view>
+  <view class="weui-media-box weui-media-box__comment">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">
+        <view class="liner"></view>
+        <icon class='icon iconfont icon-message'></icon>
+        <view>评论（{{dataSource.comment_count}}）</view>
+      </view>
+
+      <!-- comment start -->
+      <view class="weui-panel__bd" wx:for="{{commentDataSource}}" wx:for-item="item" wx:for-index="index">
+        <view class="weui-media-box__hd weui-media-box__avatorbox">
+          <image class="weui-media-box__thumb" src="{{item.author.member.avatar_url}}" />
+          <view class="weui-media-box__title weui-media-box__title__name">{{item.author.member.name}}</view>
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__desc">{{item.content}}</view>
+          <view class="weui-media-box__info">
+            <view class="weui-media-box__info__meta {{item.is_like?'weui-media-box__info__meta__active':''}}" data-index="{{index}}" bindtap="like">
+              <icon class="icon iconfont icon-thumb-up{{item.is_like?'':'-outline'}}"></icon>
+              <view class="weui-media-box__info__meta__vote"> 赞 {{item.vote_count}}</view>
+            </view>
+          </view>
+
+          <!-- child_comments回复 start -->
+          <view class="weui-media-box__child_comments"
+          wx:if="{{item.child_comments.length>0}}" wx:for="{{item.child_comments}}" wx:for-item="child_comment" wx:for-index="child_index">
+         
+            <view class="weui-media-box__hd weui-media-box__avatorbox">
+              <image class="weui-media-box__thumb" src="{{child_comment.author.member.avatar_url}}" />
+              <view class="weui-media-box__title weui-media-box__title__name">{{child_comment.author.member.name}}
+                <view class="weui-media-box__reply"> {{child_comment.author.role=="author"?"(作者)":""}} 回复 </view>
+                {{child_comment.reply_to_author.member.name}}
+              </view>
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view class="weui-media-box__desc">{{child_comment.content}}</view>
+              <view class="weui-media-box__info">
+                <view class="weui-media-box__info__meta {{child_comment.is_like?'weui-media-box__info__meta__active':''}}" data-index="{{index}}" data-childindex="{{child_index}}" bindtap="child_comment_like">
+                  <icon class="icon iconfont icon-thumb-up{{child_comment.is_like?'':'-outline'}}"></icon>
+                  <view class="weui-media-box__info__meta__vote">赞 {{child_comment.vote_count}} </view>
+                </view>
+              </view>
+            </view>
+            <block wx:if="{{child_index==item.child_comments.length-1&&item.child_comment_count>item.child_comments.length}}">
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__info weui-media-box__info__loadmore" data-index="{{index}}" data-id="{{item.id}}" bindtap="getChildComments">
+                  展开其他 {{item.child_comment_count - item.child_comments.length}} 条回复
+                </view>
+              </view>
+            </block>
+          </view>
+
+          <!-- child_comments回复 end -->
+        </view>
+      </view>
+      <!-- comment end -->
+    </view>
+  </view>
+  <scrollToTop id="scrollToTop"></scrollToTop>
+
+  <template is="loadmore" wx:if="{{isLoading}}"></template>
+  <template is="loadmore" wx:if="{{commentDataSource.length>10&&paging.is_end}}"></template>
 </view>

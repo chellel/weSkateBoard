@@ -1,0 +1,38 @@
+/* components/scrollToTop/scrollToTop.wxss */
+@import "../../style/iconfont.wxss";
+
+.corner-icon {
+  position: fixed;
+  bottom: 80rpx;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  box-shadow: -4px 3px 10px 2px rgba(26, 26, 26, 0.1);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #0084ff;
+}
+
+.corner-icon:active {
+  opacity: 0.6;
+}
+
+.corner-icon .iconfont {
+  font-size: 24px;
+}
+
+.corner-icon-content{
+  opacity: 1;
+  transform: translateY(10);
+}
+
+.move {
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}

@@ -60,9 +60,15 @@ function formatWxParse(WxParse, dataSource, content, index, that, bindName="cont
 
 }
 
+/**替换文本中所有包含p标签的字符串 */
+function replaceP(item, content) {
+  item[content] = item[content].replace(/<p>/g, '').replace(/<\/p>/g, '');
+}
+
 module.exports = {
   formatTime,
   getTricks,
   getAnswer,
-  formatWxParse
+  formatWxParse,
+  replaceP
 }

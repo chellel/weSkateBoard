@@ -85,6 +85,7 @@
     </block>
 
   </view>
+  <scrollToTop id="scrollToTop"></scrollToTop>
 
    <template is="loadmore" wx:if="{{isLoading}}"></template>
 <template is="page-end" wx:if="{{paging.is_end}}"></template>

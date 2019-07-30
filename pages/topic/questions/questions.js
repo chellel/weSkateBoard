@@ -32,7 +32,7 @@ Page({
         currentPage: 0, //当前起始筛选条数
         isRender: false,
       isLoading: false,
-      paging:{}
+      paging:{},
       },
       {
         title: "精华",
@@ -43,11 +43,12 @@ Page({
         currentPage: 0, //当前起始筛选条数
         isRender: false,
         isLoading:false,
-        paging: {}
+        paging: {},
 
       }],
     activityArray: [],
     essenceArray: [],
+    clientY: getApp().globalData.systemInfo.windowHeight - 80,
   },
   /**切换tab导航标题 */
   switchNav: function(e) {
@@ -217,17 +218,11 @@ Page({
     if (!tid) //test
       tid = "19629946";
     this.getDataSource(this.data.activeIndex);
-
-
-    //var topicUrl = `https://www.zhihu.com/api/v4/topics/${tid}`;
-    //   var topicsUrl = `https://www.zhihu.com/api/v4/topics/${tid}/feeds/essence`;
-    var test4 = "https://www.zhihu.com/api/v4/topics/19629946/feeds/top_activity?include=data[*]&limit=20";
-    var d = getApp().globalData.systemInfo.windowHeight - 30;
-
-
     this.setData({
-      clientHeight: getApp().globalData.systemInfo.windowHeight //scroll-view内容的高度等于 设备的高度 - tab标题高度
+      clientHeight: getApp().globalData.systemInfo.windowHeight //scroll-view内容的高度 = 设备的高度
     });
+    this.scrollToTop = this.selectComponent("#scrollToTop");
+
   },
 
   /**
@@ -266,7 +261,7 @@ Page({
   },
 
   onScrollReachBottom() {
-    console.log("onReachBottom")
+    console.log("加载加载加载")
     this.getDataSource(this.data.activeIndex);
   },
   /**
@@ -276,6 +271,15 @@ Page({
 
   },
 
+  onScroll: function (e) {
+    e.detail.scrollTop > this.data.clientY ? this.scrollToTop.show() : this.scrollToTop.hide();
+  },
+  scrollToScrollTop(){
+   
+    this.setData({
+      scrollTopNum:0
+    })
+  },
   /**
    * 用户点击右上角分享
    */
