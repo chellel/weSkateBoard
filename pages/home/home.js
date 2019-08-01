@@ -123,7 +123,9 @@ Page({
     scrollLeft: 0, //tab标题的滚动条位置
     slideOffset: 0,
     tabW: 0,
-    copy: {}
+    copy: {},
+    windowHeight:getApp().globalData.systemInfo.windowHeight
+
   },
 
 
@@ -237,6 +239,7 @@ Page({
   getRect() {
     var offset = 0;
     var clientHeight = wx.getSystemInfoSync().windowHeight;
+    debugger
     var echo = wx.createSelectorQuery().selectAll(".data-echo");
     var imageDataSource = this.data.imageDataSource;
     echo.boundingClientRect((rect) => {
