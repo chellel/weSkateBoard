@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+      "searchResult": "/components/searchResult/searchResult",
+    "scrollToTop": "/components/scrollToTop/scrollToTop"
+  }
 }

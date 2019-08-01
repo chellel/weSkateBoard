@@ -6,6 +6,7 @@ Page({
    */
   data: {
    q:""
+  
   },
   /**
    * 生命周期函数--监听页面加载
@@ -60,7 +61,9 @@ Page({
   onReachBottom: function() {
   
   },
-
+  onPageScroll: function (e) {
+    e.scrollTop > this.data.clientY*2 ? this.scrollToTop.show() : this.scrollToTop.hide();
+  },
   /**
    * 用户点击右上角分享
    */

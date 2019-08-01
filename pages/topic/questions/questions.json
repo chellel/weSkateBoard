@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "scrollToTop": "../../../components/scrollToTop/scrollToTop"
+  },
   "navigationBarTitleText":"话题"
 }

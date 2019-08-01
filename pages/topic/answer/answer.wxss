@@ -93,7 +93,7 @@
   width: 86%;
   height: 70px;
   left: 6%;
-  box-shadow: 2px 2px 10px 0px #ccc;
+  box-shadow: 2px 2px 4px 0px #ccc;
   display: flex;
   align-items: center;
 }
@@ -166,8 +166,9 @@
 .content__card__all {
   position: relative;
 }
+
 .content__card:active .weui-media-box__avatorbox,
-.content__card:active .weui-media-box__bd{
+.content__card:active .weui-media-box__bd {
   opacity: 0.6;
 }
 
@@ -178,9 +179,111 @@
   top: 0;
   width: 100%;
 }
-.weui-media-box__time{
-color: #888;
-font-size: 12px;
-text-align: right;
 
+.weui-media-box__time {
+  color: #888;
+  font-size: 12px;
+  text-align: right;
+}
+
+/** 评论区 */
+
+.weui-media-box__comment .weui-media-box__thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.weui-media-box__title.weui-media-box__title__name {
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  display: -webkit-flex;
+}
+
+.weui-media-box__avatorbox {
+  display: flex;
+}
+
+.weui-media-box__comment .weui-media-box__bd.weui-media-box__bd_in-appmsg {
+  margin-left: 35px;
+}
+
+.weui-media-box__comment .weui-panel__bd .weui-media-box__desc {
+  height: auto;
+  display: block;
+  color: #000;
+}
+
+.weui-media-box__info {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.liner {
+  width: 3px;
+  background: #0084ff;
+  height: 14px;
+  margin-right: 6px;
+}
+
+.weui-media-box::before {
+  display: none;
+}
+
+.weui-media-box__comment .weui-panel__hd {
+  padding-left: 0;
+}
+
+.weui-media-box__comment .weui-panel__hd .icon {
+  margin-right: 2px;
+}
+
+.weui-media-box__title.weui-media-box__title__name .weui-media-box__reply {
+  color: #8590a6;
+  padding: 0 6px;
+}
+
+.weui-media-box__comment .weui-media-box__info__meta {
+  color: #8590a6;
+}
+
+.weui-media-box__comment .weui-media-box__info__meta__active {
+  color: #0084ff;
+}
+
+.weui-media-box__comment .weui-media-box__info__meta:active {
+  opacity: 0.6;
+}
+
+.weui-media-box__info.weui-media-box__info__loadmore {
+  color: #8590a6;
+  margin-bottom: 10px;
+}
+
+.weui-media-box__info.weui-media-box__info__loadmore:active {
+  color: #0084ff;
+}
+
+.weui-media-box__comment .weui-media-box__info__meta icon {
+  position: relative;
+  top: -2px;
+}
+
+.weui-media-box__info__meta .weui-media-box__info__meta__vote {
+  align-items: center;
+  display: flex;
+}
+
+.weui-media-box__comment .weui-media-box__info__meta {
+  display: flex;
+  height: 30px;
+  line-height: 30px;
+}
+
+.weui-media-box__child_comments {
+  background: #f2f2f2;
+  padding: 4px 2px;
 }

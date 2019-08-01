@@ -2,12 +2,12 @@
 <!--pages/search/index/index.wxml-->
 <import src="/templates/wePanel/wePanel.wxml" />
 <import src="/templates/loadmore/loadmore.wxml" />
-<scroll-view scroll-y style="height:100%;" bindscrolltolower="onScrollReachBottom" enable-back-to-top="true">
+<scroll-view scroll-y style="height:100%;" bindscroll="onScroll" bindscrolltolower="onScrollReachBottom" enable-back-to-top="true">
 <!-- wiki_box start -->
 <block wx:if="{{topicInfo}}">
   <view class="weui-panel weui-box-panel">
     <view class="weui-media-box weui-media-box_text">
-      <navigator url="../../topic/questions/questions?id={{topicInfo.id}}" hover-class="none">
+      <navigator url="/pages/topic/questions/questions?id={{topicInfo.id}}" hover-class="none">
         <view class="weui-media-box__hd">
           <image class="avator" src="{{topicInfo.avatar_url}}" />
           <view class="weui-media-box__bd">
@@ -86,6 +86,9 @@
 
   </view>
 </scroll-view>
+
+  <scrollToTop id="scrollToTop"></scrollToTop>
+
    <template is="loadmore" wx:if="{{isLoading}}"></template>
 <template is="page-end" wx:if="{{paging.is_end}}"></template>
  

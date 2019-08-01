@@ -22,7 +22,9 @@ Component({
     readMore: false,
     readIndexMore: false,
     readIndex: 1, //默认收起时只显示一行
-    isLoading: false
+    isLoading: false,
+    clientY: getApp().globalData.systemInfo.windowHeight - 80,
+
   },
 
   /**
@@ -179,16 +181,21 @@ Component({
         })
       });
     },
+    onScroll(e){
+      e.detail.scrollTop > this.data.clientY * 2 ? this.scrollToTop.show() : this.scrollToTop.hide();
+    },
     onScrollReachBottom() {
       wx.showToast({
         title: '上拉刷新',
       })
       this.getDataSource();
-    }
+    },
   },
   ready: function() {
     if (this.data.paging.is_end)
     return
     this.getDataSource();
+    this.scrollToTop = this.selectComponent("#scrollToTop");
+
   }
 })

@@ -1,0 +1,8 @@
+<!--components/scrollToTop/scrollToTop.wxml-->
+  <movable-area class="move">
+    <movable-view class="corner-icon" hidden="{{isHidden}}" direction="vertical" x="{{clientX}}" y="{{clientY}}" style="pointer-events: auto;">
+      <view class="corner-icon-content" bindtap="scrollToTop" animation="{{animation}}" >
+        <view class="icon iconfont icon-top02"></view>
+      </view>
+    </movable-view>
+  </movable-area>
