@@ -19,7 +19,7 @@
 
       <swiper current="{{activeIndex}}" class="swiper-box" duration="200" bindchange="switchTab" style="height: {{windowHeight}}px">
         <swiper-item class="swiper-item" wx:for-items="{{tabDataSource}}" wx:for-item='tabitem' wx:key="id" wx:index="index">
-          <scroll-view scroll-y="true" class="scoll-h" style="height: {{windowHeight}}px" bindscroll="onPageScroll">
+          <scroll-view scroll-y="true" class="scoll-h" style="height: {{windowHeight}}px" bindscroll="onPageScroll"  bindscrolltolower="onScrollReachBottom" enable-back-to-top="true">
             <!-- 教程 -->
             <block wx:if="{{tabitem.slotname=='slot1'}}">
               <!-- 搜索栏 start -->
@@ -44,11 +44,12 @@
                   </image>
                 </swiper-item>
               </swiper>
-              <!-- 轮播图 end -->
-              <searchResult query="滑板">
-              </searchResult>
+       
 
-
+      <!-- 轮播图 end -->
+            <searchResult id="searchResult" query="滑板">
+            </searchResult>
+              
             </block>
             <!-- 动作 -->
             <block wx:elif="{{tabitem.slotname=='slot2'}}">

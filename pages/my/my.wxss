@@ -1,1 +1,83 @@
 /* pages/my/my.wxss */
+.weui-panel::after{
+  display: none;
+}
+.weui-panel{
+  margin-top: 0;
+}
+.weui-panel.weui-box-panel {
+  margin: 0 10px;
+  box-shadow: 2px 2px 10px 0px #ccc;
+
+}
+
+.weui-media-box__hd_in-appmsg {
+  width: 50px;
+  height: 50px;
+}
+
+.weui-panel__user .weui-media-box {
+  padding-bottom: 5px;
+}
+
+.weui-media-box.weui-media-box__hd_flex {
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+.weui-cell_active{
+  background: none;
+  opacity: 0.9;
+}
+.weui-media-box__user:active{
+  opacity: 0.8;
+
+}
+.weui-media-box.weui-media-box__hd_flex .weui-media-box__bd:active{
+  opacity: 0.9;
+}
+.weui-media-box__hd_flex .weui-media-box__title,
+.weui-media-box__hd_flex .weui-media-box__desc {
+  text-align: center;
+}
+
+.weui-media-box__thumb {
+  border-radius: 50%;
+}
+
+.weui-cell__hd {
+  position: relative;
+  top: -2px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.weui-cell__bd {
+  font-size: 14px;
+}
+
+.content__card__all {
+  position: relative;
+}
+
+.weui-panel__user {
+  background: #db6a7094;
+}
+.weui-panel__user .weui-cell__ft_in-access::after{
+border-color: #fff;
+
+}
+.weui-panel__user,
+ .weui-panel__user .weui-media-box__desc {
+  color: #fff;
+}
+
+.content__card__all .bg-half {
+  background: #db6a7094;
+  height: 30px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}

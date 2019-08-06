@@ -1,3 +1,5 @@
 <!--pages/search/index/index.wxml-->
-<searchResult query="{{q}}"></searchResult>
+    <scroll-view scroll-y="true" class="scoll-h" style="height: {{windowHeight}}px" bindscroll="onPageScroll"  bindscrolltolower="onScrollReachBottom" enable-back-to-top="true">
+<searchResult id="searchResult" query="{{q}}"></searchResult>
 
+</scroll-view>

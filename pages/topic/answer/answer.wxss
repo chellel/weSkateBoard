@@ -214,6 +214,8 @@
 
 .weui-media-box__comment .weui-media-box__bd.weui-media-box__bd_in-appmsg {
   margin-left: 35px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 .weui-media-box__comment .weui-panel__bd {
   padding: 5px 0;
@@ -225,7 +227,9 @@
   color: #000;
   line-height: 1.6;
 }
-
+.weui-media-box__comment .weui-panel__bd{
+margin:10px 0;
+}
 .weui-media-box__info {
   margin-top: 0;
   margin-bottom: 0;
@@ -295,5 +299,9 @@
 
 .weui-media-box__child_comments {
   background: #f2f2f2;
-  padding: 4px 2px;
+  padding: 4px;
+}
+.weui-media-box__label{
+  margin: 10px 0;
+  font-size: 12px;
 }

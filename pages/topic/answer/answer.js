@@ -149,9 +149,12 @@ Page({
     } = e.currentTarget.dataset; //commentDataSource的index
     var url = `https://www.zhihu.com/api/v4/comments/${cid}/child_comments`;
     api.GET(url).then(res => {
+      var child_comments=res.data;
+      child_comments.map(child_comment => {
+        util.replaceP(child_comment, "content");
+      })
       var commentDataSource = this.data.commentDataSource;
-      commentDataSource[index].child_comments = res.data;
-      console.log(res)
+      commentDataSource[index].child_comments = child_comments;
       this.setData({
         commentDataSource
       })

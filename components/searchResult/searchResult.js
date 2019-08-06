@@ -62,6 +62,7 @@ Component({
       this.setData({
         isLoading: true
       })
+
      /* wx.showLoading({
         title: getApp().globalData.message.loadingText,
       })*/
@@ -84,6 +85,7 @@ Component({
       }
 
       api.GET(url).then(res => {
+     // if (JSON.stringify(paging) !== '{}')  return   //test
       
         var bindName = "content";
 
@@ -165,17 +167,23 @@ Component({
           })
           return dataSource;
         }
-        setTimeout(()=>{
 
           this.setData({
             dataSource: this.data.dataSource.concat(dataSource),
             paging: res.paging,
             isLoading: false
           })  
-        },2000)
      
       
    //     console.log(dataSource)
+
+        var currDataSource = this.data.dataSource;
+        dataSource = [...currDataSource, ...dataSource];
+         this.setData({
+           isLoading: false,
+           dataSource,
+           paging: res.paging
+         })
       }).catch(e => {
         this.setData({
           isLoading: false
@@ -186,13 +194,11 @@ Component({
       e.detail.scrollTop > this.data.clientY * 2 ? this.scrollToTop.show() : this.scrollToTop.hide();
     },
     onScrollReachBottom() {
-    
       this.getDataSource();
+      e.scrollTop > this.data.clientY * 2 ? this.scrollToTop.show() : this.scrollToTop.hide();
     },
   },
   ready: function() {
-    if (this.data.paging.is_end)
-    return
     this.getDataSource();
     this.scrollToTop = this.selectComponent("#scrollToTop");
 

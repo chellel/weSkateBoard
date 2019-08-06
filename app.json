@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/topic/questions/questions",
+    "pages/my/my",
     "pages/topic/answer/answer",
     "pages/home/home",
     "pages/search/index/index",
@@ -10,7 +11,7 @@
     "pages/discover/discover",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/my/my"
+    "pages/my/user/user"
   ],
   "window": {
     "backgroundTextStyle": "light",
