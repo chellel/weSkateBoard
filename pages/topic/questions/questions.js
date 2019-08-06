@@ -13,7 +13,7 @@ Page({
       activityDataSource: [],
       essenceDataSource: []
     },
-
+    showNarBar:true,
     sliderOffset: 0,
     sliderLeft: 0,
     hasline: true,
@@ -219,7 +219,7 @@ Page({
       tid = "19629946";
     this.getDataSource(this.data.activeIndex);
     this.setData({
-      clientHeight: getApp().globalData.systemInfo.windowHeight //scroll-view内容的高度 = 设备的高度
+      clientHeight: getApp().globalData.systemInfo.windowHeight - 30 //scroll-view内容的高度 = 设备的高度 - weui-narbar高度
     });
     this.scrollToTop = this.selectComponent("#scrollToTop");
 
@@ -273,6 +273,9 @@ Page({
 
   onScroll: function (e) {
     e.detail.scrollTop > this.data.clientY ? this.scrollToTop.show() : this.scrollToTop.hide();
+    this.setData({
+      showNarBar:false
+    })
   },
   scrollToScrollTop(){
    

@@ -6,9 +6,9 @@
   <view class="weui-panel weui-panel-multi" wx:for="{{dataSource}}" wx:for-item="item" wx:for-index="index" wx:key="item.id">
     <template is="wePanel" data="{{...item,index,wxParseTemArray:contentArray,wxParseIndex:index,showTitle:false}}"></template>
   </view>
-  <template is="loadmore" wx:if="{{isLoading}}"></template>
-  <template is="page-end" wx:if="{{paging.is_end}}"></template>
 
+   <template is="loadmore" data="{{show:isLoading}}"></template>
+<template is="page-end" data="{{show:paging.is_end}}"></template>
   <movable-area class="move">
     <movable-view class="corner-icon" hidden="{{isHidden}}" direction="vertical" x="{{clientX}}" y="{{clientY}}" style="pointer-events: auto;">
       <view class="corner-icon-content" bindtap="scrollToTop" animation="{{animation}}" >

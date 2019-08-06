@@ -44,3 +44,6 @@
   float: right;
 }
 
+.searchResult--weui-loadmore{
+  height: 3.2em;
+}

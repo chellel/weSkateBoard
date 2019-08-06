@@ -1,5 +1,6 @@
 @import "/style/weui.wxss";
 @import "/templates/wePanel/wePanel.wxss";
+@import "/style/iconfont.wxss";
 page{
   height: 100%;
 }

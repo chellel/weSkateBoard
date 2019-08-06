@@ -62,6 +62,7 @@ Component({
       this.setData({
         isLoading: true
       })
+
      /* wx.showLoading({
         title: getApp().globalData.message.loadingText,
       })*/
@@ -84,9 +85,8 @@ Component({
       }
 
       api.GET(url).then(res => {
-        this.setData({
-          isLoading: false
-        })
+     // if (JSON.stringify(paging) !== '{}')  return   //test
+      
         var bindName = "content";
 
         var dataSource = res.data;
@@ -170,11 +170,11 @@ Component({
 
         var currDataSource = this.data.dataSource;
         dataSource = [...currDataSource, ...dataSource];
-        this.setData({
-          dataSource,
-          paging: res.paging
-        })
-   //     console.log(dataSource)
+         this.setData({
+           isLoading: false,
+           dataSource,
+           paging: res.paging
+         })
       }).catch(e => {
         this.setData({
           isLoading: false
@@ -182,18 +182,10 @@ Component({
       });
     },
     onScroll(e){
-      e.detail.scrollTop > this.data.clientY * 2 ? this.scrollToTop.show() : this.scrollToTop.hide();
-    },
-    onScrollReachBottom() {
-      wx.showToast({
-        title: '上拉刷新',
-      })
-      this.getDataSource();
+      e.scrollTop > this.data.clientY * 2 ? this.scrollToTop.show() : this.scrollToTop.hide();
     },
   },
   ready: function() {
-    if (this.data.paging.is_end)
-    return
     this.getDataSource();
     this.scrollToTop = this.selectComponent("#scrollToTop");
 

@@ -2,7 +2,6 @@
 <!--pages/search/index/index.wxml-->
 <import src="/templates/wePanel/wePanel.wxml" />
 <import src="/templates/loadmore/loadmore.wxml" />
-<scroll-view scroll-y style="height:100%;" bindscroll="onScroll" bindscrolltolower="onScrollReachBottom" enable-back-to-top="true">
 <!-- wiki_box start -->
 <block wx:if="{{topicInfo}}">
   <view class="weui-panel weui-box-panel">
@@ -81,14 +80,13 @@
 
   <view class="weui-panel" wx:for="{{dataSource}}" wx:key="index">
     <block wx:if="{{item.object.type=='answer'}}">
-      <template is="wePanel" data="{{...item.object,index,wxParseTemArray:contentArray,wxParseIndex:item.object.search_result_answer_index,showTitle:true}}"></template>
+      <template is="wePanel" data="{{...item.object,index,wxParseTemArray:contentArray,wxParseIndex:item.object.search_result_answer_index,showTitle:false}}"></template>
     </block>
 
   </view>
-</scroll-view>
 
   <scrollToTop id="scrollToTop"></scrollToTop>
 
-   <template is="loadmore" wx:if="{{isLoading}}"></template>
-<template is="page-end" wx:if="{{paging.is_end}}"></template>
+   <template is="loadmore" data="{{show:isLoading}}"></template>
+<template is="page-end" data="{{show:paging.is_end}}"></template>
  

@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "",
   "usingComponents": {
     "scrollToTop": "../../../components/scrollToTop/scrollToTop"
   }

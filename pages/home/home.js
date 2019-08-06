@@ -214,6 +214,12 @@ Page({
 
   onPageScroll(e) {
     //   this.getRect();
+    if(this.data.activeIndex==0)
+    this.searchResult.onScroll(e);
+  },
+  onScrollReachBottom(){
+    if (this.data.activeIndex == 0)
+    this.searchResult.getDataSource();
   },
   previewImg(e) {
     var index = e.currentTarget.dataset.index;
@@ -239,7 +245,6 @@ Page({
   getRect() {
     var offset = 0;
     var clientHeight = wx.getSystemInfoSync().windowHeight;
-    debugger
     var echo = wx.createSelectorQuery().selectAll(".data-echo");
     var imageDataSource = this.data.imageDataSource;
     echo.boundingClientRect((rect) => {
@@ -274,6 +279,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.searchResult = this.selectComponent("#searchResult");
     var imageUrls = [];
     for (var i = 1; i <= 4; i++) {
       imageUrls.push("https://chellel.github.io/myblog/skateboard/image%20(" + i + ").jpg");

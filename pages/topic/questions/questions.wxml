@@ -4,7 +4,7 @@
 <import src="/utils/wxParse/wxParse.wxml" />
 <view class="weui-tab">
   <!-- narbar start -->
-  <view class="weui-narbar">
+  <view class="weui-narbar {{showNarBar?'':'is-hidden'}}">
     <block wx:for-items="{{narbar}}" wx:key="id" wx:for-index="index">
       <button class="weui-narbar__button {{activeIndex==index?'weui-narbar__button__active':''}}" current="{{activeIndex}}" data-index="{{index}}" bindtap="switchNav">{{item.title}}</button>
     </block>
@@ -13,7 +13,7 @@
 
   <!-- swiper start -->
   <swiper current="{{activeIndex}}" class="swiper-box" duration="200" bindchange="switchTab" style="height: {{clientHeight}}px">
-    <swiper-item class="swiper-item" wx:for-items="{{narbar}}" wx:for-item='tabitem' wx:key="id" wx:index="index">
+    <swiper-item class="swiper-item" style="margin-top:{{showNarBar?'30':'0'}}px" wx:for-items="{{narbar}}" wx:for-item='tabitem' wx:key="id" wx:index="index">
       <scroll-view scroll-y="true" scroll-with-animation="true" scroll-top="{{scrollTopNum}}" enable-back-to-top="true" class="scoll-h" style="height: {{clientHeight}}px" bindscrolltolower="onScrollReachBottom" bindscroll="onScroll">
 
         <view class='weui-panel weui-panel-multi' wx:for="{{dataSource[tabitem.datasourceId]}}" wx:key="id" wx:for-item="item" wx:for-index="index">
@@ -30,9 +30,8 @@
 
 
         </view>
-<template is="loadmore" wx:if="{{tabitem.isLoading}}"></template>
-<template is="page-end" wx:if="{{tabitem.paging.is_end}}"></template>
-        
+         <template is="loadmore" data="{{show:tabitem.isLoading}}"></template>
+<template is="page-end" data="{{show:tabitem.paging.is_end}}"></template>
       </scroll-view>
     </swiper-item>
   </swiper>

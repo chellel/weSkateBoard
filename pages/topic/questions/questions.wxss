@@ -3,10 +3,17 @@
 @import "/components/dxTabPanel/dxTabPanel.wxss";
 
 .weui-narbar {
-  display: flex;margin: 5px;
+  display: flex;
 justify-content: center;
+position: fixed;
+z-index: 100;
+background: #fff;
+width: 100%;
+  transition: transform .5s;
 }
-
+.weui-narbar.is-hidden{
+   transform: translateY(-100%);
+}
 .weui-narbar__button {
   width: 100px;
   height: 30px;
