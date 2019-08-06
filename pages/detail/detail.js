@@ -23,7 +23,6 @@ Page({
     this.setData({
       dataSource
     })
-debugger
   },
 
   /**

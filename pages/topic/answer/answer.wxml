@@ -61,7 +61,7 @@
       </view>
 
       <!-- comment start -->
-      <view class="weui-panel__bd" wx:for="{{commentDataSource}}" wx:for-item="item" wx:for-index="index">
+      <view class="weui-panel__bd" wx:for="{{commentDataSource}}" wx:for-item="item" wx:key="index" wx:for-index="index">
         <view class="weui-media-box__hd weui-media-box__avatorbox">
           <image class="weui-media-box__thumb" src="{{item.author.member.avatar_url}}" />
           <view class="weui-media-box__title weui-media-box__title__name">{{item.author.member.name}}</view>
@@ -76,9 +76,8 @@
           </view>
 
           <!-- child_comments回复 start -->
-          <view class="weui-media-box__child_comments"
-          wx:if="{{item.child_comments.length>0}}" wx:for="{{item.child_comments}}" wx:for-item="child_comment" wx:for-index="child_index">
-         
+          <view class="weui-media-box__child_comments" wx:if="{{item.child_comments.length>0}}" wx:for="{{item.child_comments}}" wx:for-item="child_comment" wx:key="child-index" wx:for-index="child_index">
+
             <view class="weui-media-box__hd weui-media-box__avatorbox">
               <image class="weui-media-box__thumb" src="{{child_comment.author.member.avatar_url}}" />
               <view class="weui-media-box__title weui-media-box__title__name">{{child_comment.author.member.name}}
@@ -109,9 +108,10 @@
       </view>
       <!-- comment end -->
     </view>
+  
+   <template is="loadmore" wx:if="{{isLoading}}"></template>
+  <template is="bottomline" wx:if="{{commentDataSource.length>10&&paging.is_end}}"></template>
   </view>
   <scrollToTop id="scrollToTop"></scrollToTop>
-
-  <template is="loadmore" wx:if="{{isLoading}}"></template>
-  <template is="loadmore" wx:if="{{commentDataSource.length>10&&paging.is_end}}"></template>
+ 
 </view>

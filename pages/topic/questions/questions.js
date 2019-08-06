@@ -132,12 +132,8 @@ Page({
     
     var topicsUrl = "";
     if (Object.keys(paging).length > 0) {//判断paging不为空
-      if (paging.is_end) {
-        wx.showToast({
-          title: '到底啦',
-        })
+      if (paging.is_end) 
         return
-      }
       topicsUrl = paging.next;
     } else {
       topicsUrl = `https://www.zhihu.com/api/v4/topics/${tid}/feeds/${type}?include=data[*]&limit=${limit}&offset=0`;

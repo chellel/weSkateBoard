@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/topic/questions/questions",
+    "pages/topic/answer/answer",
     "pages/home/home",
     "pages/search/index/index",
-    "pages/topic/answer/answer",
     "pages/search/searchBar/searchBar",
-    "pages/topic/questions/questions",
     "pages/topic/answers/answers",
     "pages/detail/detail",
     "pages/discover/discover",

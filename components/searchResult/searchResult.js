@@ -84,9 +84,7 @@ Component({
       }
 
       api.GET(url).then(res => {
-        this.setData({
-          isLoading: false
-        })
+      
         var bindName = "content";
 
         var dataSource = res.data;
@@ -167,13 +165,16 @@ Component({
           })
           return dataSource;
         }
+        setTimeout(()=>{
 
-        var currDataSource = this.data.dataSource;
-        dataSource = [...currDataSource, ...dataSource];
-        this.setData({
-          dataSource,
-          paging: res.paging
-        })
+          this.setData({
+            dataSource: this.data.dataSource.concat(dataSource),
+            paging: res.paging,
+            isLoading: false
+          })  
+        },2000)
+     
+      
    //     console.log(dataSource)
       }).catch(e => {
         this.setData({
@@ -185,9 +186,7 @@ Component({
       e.detail.scrollTop > this.data.clientY * 2 ? this.scrollToTop.show() : this.scrollToTop.hide();
     },
     onScrollReachBottom() {
-      wx.showToast({
-        title: '上拉刷新',
-      })
+    
       this.getDataSource();
     },
   },

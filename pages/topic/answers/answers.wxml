@@ -7,7 +7,7 @@
     <template is="wePanel" data="{{...item,index,wxParseTemArray:contentArray,wxParseIndex:index,showTitle:false}}"></template>
   </view>
   <template is="loadmore" wx:if="{{isLoading}}"></template>
-  <template is="page-end" wx:if="{{paging.is_end}}"></template>
+  <template is="bottomline" wx:if="{{paging.is_end}}"></template>
 
   <movable-area class="move">
     <movable-view class="corner-icon" hidden="{{isHidden}}" direction="vertical" x="{{clientX}}" y="{{clientY}}" style="pointer-events: auto;">

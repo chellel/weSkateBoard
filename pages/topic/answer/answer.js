@@ -74,40 +74,38 @@ Page({
     var url = "";
     var {
       paging,
-      commentDataSource: currCommentDataSource,
       offset
     } = this.data;
+
     if (paging) {
       if (paging.is_end) return
     }
+
     this.setData({
       isLoading: true
     })
     url = `https://www.zhihu.com/api/v4/answers/${this.aid}/root_comments?order=normal&limit=${limit}&offset=${offset}&status=open`
-
+    console.log(url)
     api.GET(url).then((res) => {
-      this.setData({
-        isLoading: false
-      })
-      console.log(res)
+//      console.log(res)
       var commentDataSource = res.data;
       handleHTML(commentDataSource);
 
       function handleHTML(dataSource) {
         dataSource.map(item => {
           util.replaceP(item, "content");
-          item.child_comments.map(child_comment=>{
+          item.child_comments.map(child_comment => {
             util.replaceP(child_comment, "content");
           })
         })
       }
-      if (currCommentDataSource.length > 0)
-        commentDataSource = [...currCommentDataSource, ...commentDataSource];
-      this.setData({
-        commentDataSource,
-        paging: res.paging,
-        offset: offset + limit
-      })
+        this.setData({
+          commentDataSource: this.data.commentDataSource.concat(commentDataSource),
+          paging: res.paging,
+          isLoading: false,
+          offset: offset + limit
+        })
+      
     }).catch(e => {
       this.setData({
         isLoading: false
@@ -130,10 +128,13 @@ Page({
   },
   /**评论的回复点赞 */
   child_comment_like(e) {
-    var { index, childindex} = e.currentTarget.dataset;
+    var {
+      index,
+      childindex
+    } = e.currentTarget.dataset;
     var commentDataSource = this.data.commentDataSource;
     var is_like = commentDataSource[index].child_comments[childindex].is_like;
-    is_like=is_like!=undefined?!is_like:true;
+    is_like = is_like != undefined ? !is_like : true;
     is_like ? commentDataSource[index].child_comments[childindex].vote_count++ : commentDataSource[index].child_comments[childindex].vote_count--;
     commentDataSource[index].child_comments[childindex].is_like = is_like;
     this.setData({
@@ -210,11 +211,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
+    console.log("onReachBottom")
     this.getComment();
   },
 
 
-  onPageScroll: function (e) {
+  onPageScroll: function(e) {
     e.scrollTop > this.data.clientY ? this.scrollToTop.show() : this.scrollToTop.hide();
   },
   /**

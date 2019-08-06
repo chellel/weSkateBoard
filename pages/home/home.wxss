@@ -13,16 +13,20 @@ view, scroll-view {
   padding: 0px;
   margin: 0px;
 }
-
+.scroll-h{
+   overflow: auto;
+}
 .weui-navbar {
-  position: relative;
   border-bottom: solid 1px #eee;
+  position: fixed;
+background: #fff;
+z-index: 100;
 }
 
-/*.weui-navbar, .swiper-box {
-  padding: 0 5px;
+.swiper-box {
+  padding-top: 41px;
 }
-*/
+
 
 .weui-navbar .weui-navbar__item {
   width: 25%;
