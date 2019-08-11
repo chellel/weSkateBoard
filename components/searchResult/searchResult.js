@@ -58,14 +58,14 @@ Component({
       })
     },
     getDataSource() {
-      var q=this.data.query;
+      var q = this.data.query;
       this.setData({
         isLoading: true
       })
 
-     /* wx.showLoading({
-        title: getApp().globalData.message.loadingText,
-      })*/
+      /* wx.showLoading({
+         title: getApp().globalData.message.loadingText,
+       })*/
       wx.showNavigationBarLoading()
 
       var limit = 4;
@@ -85,8 +85,8 @@ Component({
       }
 
       api.GET(url).then(res => {
-     // if (JSON.stringify(paging) !== '{}')  return   //test
-      
+        // if (JSON.stringify(paging) !== '{}')  return   //test
+
         var bindName = "content";
 
         var dataSource = res.data;
@@ -168,36 +168,40 @@ Component({
           return dataSource;
         }
 
-          this.setData({
-            dataSource: this.data.dataSource.concat(dataSource),
-            paging: res.paging,
-            isLoading: false
-          })  
-     
-      
-   //     console.log(dataSource)
+        this.setData({
+          dataSource: this.data.dataSource.concat(dataSource),
+          paging: res.paging,
+          isLoading: false
+        })
+
+
+        //     console.log(dataSource)
 
         var currDataSource = this.data.dataSource;
         dataSource = [...currDataSource, ...dataSource];
-         this.setData({
-           isLoading: false,
-           dataSource,
-           paging: res.paging
-         })
+        this.setData({
+          isLoading: false,
+          dataSource,
+          paging: res.paging
+        })
       }).catch(e => {
         this.setData({
           isLoading: false
         })
       });
     },
-    onScroll(e){
+    onScroll(e) {
       e.detail.scrollTop > this.data.clientY * 2 ? this.scrollToTop.show() : this.scrollToTop.hide();
     },
     onScrollReachBottom() {
       this.getDataSource();
       e.scrollTop > this.data.clientY * 2 ? this.scrollToTop.show() : this.scrollToTop.hide();
     },
+    _scrollToTop() {
+      this.triggerEvent("_scrollToTop");
+    },
   },
+
   ready: function() {
     this.getDataSource();
     this.scrollToTop = this.selectComponent("#scrollToTop");

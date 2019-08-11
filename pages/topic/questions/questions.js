@@ -272,17 +272,17 @@ Page({
   },
 
   onScroll: function(e) {
-    console.log(e.detail.deltaY)
-    if (e.detail.deltaY > 20)    //向上滚动 为避免回弹出现短时间内上下滚动引起的灵敏度过高闪烁效果，将阀值设置为20
+ //   console.log(e.detail.deltaY)
+    if (e.detail.deltaY > 20)    //向上滚动 为避免回弹出现短时间内上下滚动引起的灵敏度过高导致不断闪烁效果，将阀值设置为20
     {
       this.setData({
         showNarBar: true,
-      //  clientHeight: this.data.windowHeight - 30
+        clientHeight: this.data.windowHeight - 30
       })
     } else if (e.detail.deltaY < -20) {    //向下滚动
       this.setData({
         showNarBar: false,
-       // clientHeight: this.data.windowHeight
+        clientHeight: this.data.windowHeight
       })
     }
     e.detail.scrollTop > this.data.clientY ? this.scrollToTop.show() : this.scrollToTop.hide();

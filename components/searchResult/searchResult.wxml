@@ -85,7 +85,7 @@
 
   </view>
 
-  <scrollToTop id="scrollToTop"></scrollToTop>
+  <scrollToTop id="scrollToTop" bind:_scrollToTop="_scrollToTop"></scrollToTop>
 
    <template is="loadmore" data="{{show:isLoading}}"></template>
 <template is="page-end" data="{{show:paging.is_end}}"></template>

@@ -1,1 +1,64 @@
 /* pages/my/user/user.wxss */
+page,.page{
+  height: 100%;
+}
+.page{
+  background: #f2f2f2;
+}
+.page_hd{
+  height: 30%;
+  margin-bottom: 12px;
+  align-items:center;
+justify-content: center;
+display: flex;
+background: #fff;
+}
+
+.page_hd,.page_bd{
+  background: #fff;
+
+}
+
+.avatar{
+  border-radius: 50%;
+  width:60px;
+height: 60px;  
+}
+
+.name-content{
+  width: 100%;
+  text-align: center;
+}
+.weui-cell{
+  font-size: 14px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+}
+.weui-cells::before,.weui-cells::after{
+  display:none;
+}
+.col-md-4{
+  width: 30%;
+}
+
+.button-content{
+  margin: 20px;
+}
+
+radio .wx-radio-input{ 
+  /* 自定义样式.... */
+    height: 40rpx; 
+    width: 40rpx;
+    margin-top: -4rpx;
+    border: 2rpx solid #999;
+    background: transparent;
+ }
+
+.submit-btn{
+  color: #fff;
+background: #ed1b24;
+}
+.submit-btn:active{
+  opacity: 0.8;
+}

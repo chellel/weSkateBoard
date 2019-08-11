@@ -37,6 +37,6 @@
     </swiper-item>
   </swiper>
   <!-- swiper end -->
-  <scrollToTop id="scrollToTop" bind:scrollToTop="scrollToScrollTop"></scrollToTop>
+  <scrollToTop id="scrollToTop" bind:_scrollToTop="scrollToScrollTop"></scrollToTop>
 
 </view>

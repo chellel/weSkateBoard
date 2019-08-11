@@ -11,7 +11,12 @@ Page({
    */
 
   data: {
-    imageUrls: [],
+    switchDataSource: [{title:"滑板，从街头走向2020奥运", imageUrl: "https://chellel.github.io/myblog/skateboard/SkateBoardwidthOlympicGame.jpg"},
+      { title: "滑板", imageUrl: "https://chellel.github.io/myblog/skateboard/image%20(1).jpg" },
+      { title: "滑板", imageUrl: "https://chellel.github.io/myblog/skateboard/image%20(2).jpg" },
+      { title: "滑板", imageUrl: "https://chellel.github.io/myblog/skateboard/image%20(4).jpg" }
+    
+    ],
     tabDataSource: [{
         title: "教程",
         slotname: "slot1"
@@ -124,8 +129,8 @@ Page({
     slideOffset: 0,
     tabW: 0,
     copy: {},
-    windowHeight:getApp().globalData.systemInfo.windowHeight
-
+    windowHeight:getApp().globalData.systemInfo.windowHeight,
+    scrollViewTopNum: 0   //scroll-top
   },
 
 
@@ -221,15 +226,21 @@ Page({
     if (this.data.activeIndex == 0)
     this.searchResult.getDataSource();
   },
-  previewImg(e) {
-    var index = e.currentTarget.dataset.index;
-
-    wx.previewImage({
-      current: this.data.imageUrls[index],
-      urls: this.data.imageUrls
+ 
+  scrollToScrollTop() {
+    this.setData({
+      scrollTopNum: 0
     })
   },
-  previewImg1(e) {
+  swicthItemClick(e) {
+    var index = e.currentTarget.dataset.index;
+var dataSource=this.data.switchDataSource;
+var item=dataSource[index];
+   wx.navigateTo({
+     url: '/pages/detail/detail',
+   })
+  },
+  previewImg(e) {
     var index = e.currentTarget.dataset.index;
     var imageDataSource = this.data.imageDataSource;
     var imageUrls = [];
@@ -280,14 +291,6 @@ Page({
    */
   onLoad: function(options) {
     this.searchResult = this.selectComponent("#searchResult");
-    var imageUrls = [];
-    for (var i = 1; i <= 4; i++) {
-      imageUrls.push("https://chellel.github.io/myblog/skateboard/image%20(" + i + ").jpg");
-    }
-    this.setData({
-      imageUrls
-    })
-
     var store = [];
     var nodes = wx.createSelectorQuery().selectAll(".data-echo");
     for (var i = 0; i < nodes.length; i++) {

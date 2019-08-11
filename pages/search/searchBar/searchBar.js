@@ -6,7 +6,7 @@ Page({
    */
   data: {
     inputVal: "",
-    relatedSearchData: ["滑板", "滑板鞋", "滑板场", "滑板新手"],
+    relatedSearchData: ["长板", "滑板", "滑板鞋", "滑板场", "滑板新手"],
     suggestData: []
   },
 

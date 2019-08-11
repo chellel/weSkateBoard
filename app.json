@@ -1,17 +1,17 @@
 {
   "pages": [
-    "pages/topic/questions/questions",
-    "pages/my/my",
-    "pages/topic/answer/answer",
     "pages/home/home",
+    "pages/my/my",
+    "pages/my/user/user",
+    "pages/topic/questions/questions",
+    "pages/topic/answer/answer",
     "pages/search/index/index",
     "pages/search/searchBar/searchBar",
     "pages/topic/answers/answers",
     "pages/detail/detail",
     "pages/discover/discover",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/my/user/user"
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",

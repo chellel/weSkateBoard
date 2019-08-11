@@ -30,7 +30,7 @@ Component({
       this.setData({
         isHidden: true
       })
-      this.triggerEvent("scrollToTop");
+      this.triggerEvent("_scrollToTop");
     },
     show() {
       if (this.data.isHidden) {
