@@ -11,7 +11,7 @@ Page({
   data: {
     contentArray: [],
     isLoading: false,
-    clientY: getApp().globalData.systemInfo.windowHeight - 80,
+    clientY: getApp().globalData.systemInfo.screenHeight - 80,
     
   },
 

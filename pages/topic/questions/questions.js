@@ -22,7 +22,7 @@ Page({
     scrollLeft: 0, //tab标题的滚动条位置
     slideOffset: 0,
     tabW: 0,
-    windowHeight: getApp().globalData.systemInfo.windowHeight, //窗口高度
+    screenHeight: getApp().globalData.systemInfo.screenHeight, //窗口高度
     narbar: [{
         title: "讨论",
         slotname: "slot1",
@@ -49,8 +49,8 @@ Page({
     ],
     activityArray: [],
     essenceArray: [],
-    clientY: getApp().globalData.systemInfo.windowHeight - 80,
-    clientHeight: getApp().globalData.systemInfo.windowHeight//scroll-view内容的高度 = 设备的高度 - weui-narbar高度
+    clientY: getApp().globalData.systemInfo.screenHeight - 80,
+    clientHeight: getApp().globalData.systemInfo.screenHeight//scroll-view内容的高度 = 设备的高度 - weui-narbar高度
 
   },
   /**切换tab导航标题 */
@@ -272,24 +272,24 @@ Page({
   },
 
   onScroll: function(e) {
+    console.log(this.data.clientHeight)
  //   console.log(e.detail.deltaY)
     if (e.detail.deltaY > 20)    //向上滚动 为避免回弹出现短时间内上下滚动引起的灵敏度过高导致不断闪烁效果，将阀值设置为20
     {
       this.setData({
         showNarBar: true,
-        clientHeight: this.data.windowHeight - 30
+        clientHeight: this.data.screenHeight - 30
       })
     } else if (e.detail.deltaY < -20) {    //向下滚动
       this.setData({
         showNarBar: false,
-        clientHeight: this.data.windowHeight
+        clientHeight: this.data.screenHeight
       })
     }
     e.detail.scrollTop > this.data.clientY ? this.scrollToTop.show() : this.scrollToTop.hide();
 
   },
   scrollToScrollTop() {
-
     this.setData({
       scrollTopNum: 0
     })
