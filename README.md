@@ -11,9 +11,7 @@
 
 #### 效果
 
- ![image](https://github.com/chellel/weSkateBoard/blob/master/demo/onSkate_wechat.png)
 ![image](https://github.com/chellel/weSkateBoard/blob/master/demo/effect1.gif)
-<img src="https://github.com/chellel/weSkateBoard/blob/master/demo/effect1.gif" alt="效果" width="300" />
 
 ### 样式
 
