@@ -13,6 +13,8 @@
 
 ![image](https://github.com/chellel/weSkateBoard/blob/master/demo/effect1.gif)
 
+![image](https://github.com/chellel/weSkateBoard/blob/master/demo/effect2.gif)
+
 ### 样式
 
 
