@@ -9,7 +9,7 @@
   <view class='content__card__all'>
     <view class='bg-half'></view>
     <view class='content__card'>
-      <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="false">
+      <view url="" class="weui-media-box weui-media-box_appmsg" hover-class="false">
         <view class="weui-media-box__hd weui-media-box__avatorbox">
           <image class="weui-media-box__thumb" src="{{dataSource.author.avatar_url}}" />
         </view>
@@ -21,7 +21,7 @@
         <view class='weui-media-box__button'>
           <button class='{{isFollow?"active":""}}' bindtap='Follow'>{{isFollow?"已关注":"+ 关注"}}</button>
         </view>
-      </navigator>
+      </view>
     </view>
   </view>
 

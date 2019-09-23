@@ -8,7 +8,7 @@
 
 
     <view class="weui-tab">
-      <scroll-view scroll-x="true"class="weui-navbar" scroll-left="{{scrollLeft}}">
+      <scroll-view scroll-x="true" class="weui-navbar" scroll-left="{{scrollLeft}}">
         <block wx:for-items="{{tabDataSource}}" wx:key="id" wx:index="index">
           <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ?'weui-bar__item_on':''}}" bindtap="switchNav" style="width:{{tabW}}px">
             <view class="weui-navbar__title"> {{item.title}}</view>
@@ -19,7 +19,7 @@
 
       <swiper current="{{activeIndex}}" class="swiper-box" duration="200" bindchange="switchTab" style="height: {{windowHeight}}px">
         <swiper-item class="swiper-item" wx:for-items="{{tabDataSource}}" wx:for-item='tabitem' wx:key="id" wx:index="index">
-          <scroll-view scroll-y="true" class="scoll-h"  scroll-with-animation="true" enable-back-to-top="true" scroll-top="{{scrollTopNum}}"  style="height: {{windowHeight}}px" bindscroll="onPageScroll" bindscrolltolower="onScrollReachBottom" enable-back-to-top="true">
+          <scroll-view scroll-y="true" class="scoll-h" scroll-with-animation="true" enable-back-to-top="true" scroll-top="{{scrollTopNum}}" style="height: {{windowHeight}}px" bindscroll="onPageScroll" bindscrolltolower="onScrollReachBottom" enable-back-to-top="true">
             <!-- 教程 -->
             <block wx:if="{{tabitem.slotname=='slot1'}}">
               <!-- 搜索栏 start -->
@@ -40,11 +40,13 @@
               <!-- 轮播图 start -->
               <swiper indicator-dots='true' autoplay='false'>
                 <swiper-item wx:for="{{switchDataSource}}" wx:for-item="item" wx:for-index="index">
-                  <image src="{{item.imageUrl}}" style="height:100%;" mode="aspectFill" lazy-load="true" data-index="{{index}}" bindtap='swicthItemClick'>
-                  </image>
+                  <view bindtap="swicthItemClick" data-index="{{index}}" class="swiper-view" style="background-image:url('{{item.imageUrl}}')">
+                    <view class="swiper-text-container">
+                      <text class="swiper-title">{{item.title}}</text>
+                    </view>
+                  </view>
                 </swiper-item>
               </swiper>
-
 
               <!-- 轮播图 end -->
               <searchResult id="searchResult" query="滑板" bind:_scrollToTop="scrollToScrollTop">

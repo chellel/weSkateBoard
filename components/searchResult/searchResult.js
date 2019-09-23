@@ -191,7 +191,10 @@ Component({
       });
     },
     onScroll(e) {
+      if(e.detail!=undefined)
       e.detail.scrollTop > this.data.clientY * 2 ? this.scrollToTop.show() : this.scrollToTop.hide();
+      else
+      console.log("e.detail is undefined")
     },
     onScrollReachBottom() {
       this.getDataSource();
