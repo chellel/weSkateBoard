@@ -7,13 +7,13 @@
 
 目前慢慢优化，先自我欣赏。可在微信中搜索"onSkate"获取。
 
-<img src="https://github.com/chellel/weSkateBoard/blob/master/demo/onSkate_wechat.png" alt="二维码" width="250" />
+<img src="https://github.com/chellel/myblog/blob/master/images/skateboard/onSkate_wechat.png" alt="二维码" width="250" />
 
 #### 效果
 
-![image](https://github.com/chellel/weSkateBoard/blob/master/demo/effect1.gif)
+![image](https://github.com/chellel/myblog/blob/master/images/skateboard/effect1.gif)
 
-![image](https://github.com/chellel/weSkateBoard/blob/master/demo/effect2.gif)
+![image](https://github.com/chellel/myblog/blob/master/images/skateboard/effect2.gif)
 
 ### 样式
 
