@@ -47,16 +47,16 @@ const getAnswer = function(aid, callback) {
 
 
 
-function formatWxParse(WxParse, dataSource, content, index, that, bindName="content",wxParseTemArrayName="contentArray") {
+function formatWxParse(WxParse, dataSource, content, index, that, bindName = "content", wxParseTemArrayName = "contentArray") {
   WxParse.wxParse(bindName + index, 'html', content, that)
   var startIndex = that.data[wxParseTemArrayName].length;
-    if (index == dataSource.length - 1) {
-      WxParse.wxParseTemArray(wxParseTemArrayName, bindName, startIndex, dataSource.length, that)
-      for (var i = startIndex;i<dataSource.length;i++){
-        delete that.data[bindName+i];
-      }
+  if (index == dataSource.length - 1) {
+    WxParse.wxParseTemArray(wxParseTemArrayName, bindName, startIndex, dataSource.length, that)
+    for (var i = startIndex; i < dataSource.length; i++) {
+      delete that.data[bindName + i];
     }
- 
+  }
+
 
 }
 
@@ -65,10 +65,25 @@ function replaceP(item, content) {
   item[content] = item[content].replace(/<p>/g, '').replace(/<\/p>/g, '');
 }
 
+/** 将数值转换为万单位的数值 */
+function formatLargeNumber(num) {
+  var convertNum = num;
+  if (typeof(num) != "number")
+    num = parseInt(num);
+  if (num > 1000) {
+    num = num / 1000;
+    num = num.toFixed(1);
+    convertNum = num + 'k';
+  }
+
+  return convertNum;
+}
+
 module.exports = {
   formatTime,
   getTricks,
   getAnswer,
   formatWxParse,
-  replaceP
+  replaceP,
+  formatLargeNumber
 }

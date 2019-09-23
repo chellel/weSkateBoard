@@ -24,7 +24,8 @@
         <view class="weui-media-box__info">
           <view class="weui-media-box__info__meta">{{voteup_count}} 赞同</view>
           <view class="weui-media-box__info__meta"></view>
-          <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{comment_count}} 评论</view>
+          <view wx:if="{{comment_count!=0}}" class="weui-media-box__info__meta weui-media-box__info__meta_extra">{{comment_count}} 评论</view>
+            <view class="weui-media-box__info__meta">9小时前</view>
         </view>
       </view>
     </view>

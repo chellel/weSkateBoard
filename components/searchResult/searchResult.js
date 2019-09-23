@@ -82,11 +82,11 @@ Component({
         url = paging.next;
       } else {
         url = `https://www.zhihu.com/api/v4/search_v3?t=general&q=${q}&correction=1&offset=0&limit=${limit}&lc_idx=0&show_all_topics=0`;
+        
       }
 
       api.GET(url).then(res => {
         // if (JSON.stringify(paging) !== '{}')  return   //test
-
         var bindName = "content";
 
         var dataSource = res.data;
@@ -114,7 +114,9 @@ Component({
                 var topicInfo = dataItem.object;
                 topicInfo["introduction"] = topicInfo["introduction"].replace(/<em>/g, '').replace(/<\/em>/g, '');
                 topicInfo["name"] = topicInfo["name"].replace(/<em>/g, '').replace(/<\/em>/g, '');
-
+                topicInfo["followers_count"] = util.formatLargeNumber(topicInfo["followers_count"]);
+                topicInfo["questions_count"] = util.formatLargeNumber(topicInfo["questions_count"]);
+                
                 var content_essence_list = topicInfo.content_essence_list;
                 if (Array.isArray(content_essence_list) == true)
                   content_essence_list.forEach((item) => {

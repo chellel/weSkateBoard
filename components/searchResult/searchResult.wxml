@@ -6,7 +6,7 @@
 <block wx:if="{{topicInfo}}">
   <view class="weui-panel weui-box-panel">
     <view class="weui-media-box weui-media-box_text">
-      <navigator url="/pages/topic/questions/questions?id={{topicInfo.id}}" hover-class="none">
+      <navigator url="/pages/topic/questions/questions?id={{topicInfo.id}}&name={{topicInfo.name}}" hover-class="none">
         <view class="weui-media-box__hd">
           <image class="avator" src="{{topicInfo.avatar_url}}" />
           <view class="weui-media-box__bd">
@@ -14,9 +14,9 @@
               {{topicInfo.name}}
             </view>
             <view class="weui-media-box__info">
-              <view class="weui-media-box__info__meta">关注者 {{topicInfo.followers_count}}</view>
+              <view class="weui-media-box__info__meta">关注 {{topicInfo.followers_count}}</view>
 
-              <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">问题数 {{topicInfo.questions_count}}</view>
+              <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">讨论 {{topicInfo.questions_count}}</view>
 
             </view>
           </view>

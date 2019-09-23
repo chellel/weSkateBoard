@@ -219,6 +219,9 @@ Page({
     tid = options.id;
     if (!tid) //test
       tid = "19629946";
+      wx.setNavigationBarTitle({
+        title: options.name,
+      })
     this.getDataSource(this.data.activeIndex);
 
 
