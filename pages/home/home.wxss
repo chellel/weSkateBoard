@@ -200,3 +200,16 @@ color: #fff;
 .swiper-title{
   padding-left: 20px;
 }
+
+.weui-media-box:active{
+  opacity: 0.6;
+  color:#ed1b24;
+}
+
+.weui-media-box:active .weui-media-box__desc{
+  color:#ed1b24;
+}
+.image-container{
+  display: flex;
+  justify-content: center;
+}

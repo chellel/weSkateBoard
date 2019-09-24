@@ -1,0 +1,20 @@
+<view id="main">
+  <view id="timeline" class="timeline">
+    <hr class="hrLine" />
+    <view class="wrap">
+      <ul class="issues">
+        <li wx:for="{{timeline}}" wx:for-item="item" wx:key="time" wx:for-index="index">
+          <view wx:if="{{index==0}}" class="left"></view>
+          <view class="right">
+            <h5>{{item.version}}</h5>
+            <hr class="yearLine" />
+            <span class="textArea">
+              {{item.text}}
+            </span>
+          </view>
+        </li>
+
+      </ul>
+    </view>
+  </view>
+</view>

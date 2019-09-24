@@ -40,6 +40,7 @@ App({
     })
   },
   globalData: {
+    connectUrl:"https://www.fastmock.site/mock/a9640dd42395bca80f5e098ce33afdd1/skateboard/",
     userInfo: null,
     message:{
       noDataText:"暂无数据",

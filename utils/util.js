@@ -19,7 +19,7 @@ const getTricks = function(callback) {
   wx.showLoading({
     title: '加载中...',
   })
-  api.GET("https://www.easy-mock.com/mock/5d302560f532ea49fab32d91/skateboard/getTrick").then((data) => {
+  api.GET("https://www.fastmock.site/mock/a9640dd42395bca80f5e098ce33afdd1/skateboard/api/getTrick").then((data) => {
     callback(data);
     wx.hideLoading()
   });

@@ -1,9 +1,11 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/article/article",
+    "pages/timeline/timeline",
     "pages/my/my",
-    "pages/my/user/user",
     "pages/topic/questions/questions",
+    "pages/my/user/user",
     "pages/topic/answer/answer",
     "pages/search/index/index",
     "pages/search/searchBar/searchBar",

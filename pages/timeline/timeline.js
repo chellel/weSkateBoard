@@ -1,32 +1,26 @@
-// pages/detail/detail.js
+// pages/timeline/timeline.js
+//参考 jQuery年份时间轴插件https://www.17sucai.com/pins/32078.html
+var api = require("../../utils/api.js");
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    imgUrl:"",
-    windowHeight:getApp().globalData.systemInfo.windowHeight
+timeline:[
+]
   },
-/**预览图片 */
-  previewImg(e){
-    wx.previewImage({
-      current: this.data.imgUrl,
-      urls: [this.data.imgUrl]
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(options.data==undefined)
-    return
-    var dataSource = JSON.parse(options.data);
-    this.setData({
-      dataSource,
-      imgUrl:`https://chellel.github.io/myblog/skateboard/image%20(${dataSource.id}).jpg`
-    })
-
+    api.GET(getApp().globalData.connectUrl + "api/getTimeLine").then(res => {
+      this.setData({
+        timeline:res.data.items
+      })
+    });
   },
 
   /**

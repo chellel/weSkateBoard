@@ -26,7 +26,9 @@ wx.showModal({
             }
           },
         })
-      }
+      },
+      complete:e=>{
+        }
     })
   })
 }

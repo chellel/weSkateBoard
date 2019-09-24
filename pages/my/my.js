@@ -8,9 +8,30 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo:false,
+    isauth: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
+  getUserInfo: function (e) {
+    if (e.detail.errMsg && e.detail.errMsg === 'getUserInfo:fail auth deny') {
+      this.setData({
+        isauth: false
+      })
+    }
+    if (e.detail.userInfo) {
+      wx.navigateTo({
+        url: 'user/user',
+      })
+      if (JSON.stringify(app.globalData.userInfo) === '{}'){
+        app.globalData.userInfo = e.detail.userInfo
+        this.setData({
+          userInfo: e.detail.userInfo,
+          hasUserInfo: true
+        })
+      }
+     
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

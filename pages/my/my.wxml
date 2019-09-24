@@ -2,17 +2,18 @@
 <button open-type="getUserInfo" hidden="true">获取用户信息</button>
 <view class="weui-panel weui-panel__user">
   <view class="weui-panel__bd">
-    <navigator url="/pages/my/user/user" class="weui-media-box weui-media-box__user weui-media-box_appmsg" hover-class="weui-cell_active">
+    <button class='weui-cell__ft' open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="weui-media-box weui-media-box__user weui-media-box_appmsg" hover-class="weui-cell_active">
       <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
         <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
       </view>
       <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-        <view class="weui-media-box__title">chellel</view>
+        <view class="weui-media-box__title">{{userInfo.nickName}}</view>
         <view class="weui-media-box__desc">一个沉迷滑板的程序员</view>
       </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
 
-    </navigator>
+    </button>
+
   </view>
   <view class="weui-panel__bd">
     <view class="weui-media-box weui-media-box__hd_flex">
@@ -20,7 +21,7 @@
         <view class="weui-media-box__title">
       0
         </view>
-        <view class="weui-media-box__desc">我的收藏</view>
+        <view class="weui-media-box__desc">我的关注</view>
       </view>
        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
         <view class="weui-media-box__title">
@@ -30,11 +31,11 @@
       </view>
        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
         <view class="weui-media-box__title">0</view>
-        <view class="weui-media-box__desc">我的收藏</view>
+        <view class="weui-media-box__desc">我的评论</view>
       </view>
        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
         <view class="weui-media-box__title">1</view>
-        <view class="weui-media-box__desc">我的收藏</view>
+        <view class="weui-media-box__desc">我的点赞</view>
       </view>
     </view>
   </view>
@@ -55,15 +56,15 @@
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
           </view>
-          <view url="" class="weui-cell weui-cell_access">
+          <navigator url="/pages/timeline/timeline" class="weui-cell weui-cell_access" hover-class="none">
             <view class="weui-cell__hd">
               <icon class="icon iconfont icon-star1"></icon>
             </view>
             <view class="weui-cell__bd weui-cell_primary">
-              <view>我的收藏</view>
+              <view>版本更新日志</view>
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-          </view>
+          </navigator>
         </view>
       </view>
     </view>

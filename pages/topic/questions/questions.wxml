@@ -15,24 +15,24 @@
   <swiper current="{{activeIndex}}" class="swiper-box" duration="200" bindchange="switchTab" style="height: {{clientHeight}}px">
     <swiper-item class="swiper-item" wx:for-items="{{narbar}}" wx:for-item='tabitem' wx:key="id" wx:index="index">
       <scroll-view scroll-y="true" scroll-with-animation="true" scroll-top="{{scrollTopNum}}" enable-back-to-top="true" class="scoll-h" style="height: {{clientHeight}}px;margin-top:{{showNarBar?'30':'0'}}px;" bindscrolltolower="onScrollReachBottom" bindscroll="onScroll">
-<view class="" style="position:relative;">
- <view class='weui-panel weui-panel-multi' wx:for="{{dataSource[tabitem.datasourceId]}}" wx:key="id" wx:for-item="item" wx:for-index="index">
-          <!-- top_activity start -->
-          <block wx:if="{{tabitem.type=='top_activity'}}">
-            <template is="wePanel" data="{{...item.target,index,wxParseTemArray:activityArray,wxParseIndex:index,showTitle:true}}"></template>
-          </block>
-          <!-- top_activity end -->
-          <!-- essence start -->
-          <block wx:elif="{{tabitem.type=='essence'}}">
-            <template is="wePanel" data="{{...item.target,index,wxParseTemArray:essenceArray,wxParseIndex:index,showTitle:true}}"></template>
-          </block>
-          <!-- essence end -->
+        <view class="" style="position:relative;">
+          <view class='weui-panel weui-panel-multi' wx:for="{{dataSource[tabitem.datasourceId]}}" wx:key="id" wx:for-item="item" wx:for-index="index">
+            <!-- top_activity start -->
+            <block wx:if="{{tabitem.type=='top_activity'}}">
+              <template is="wePanel" data="{{...item.target,index,wxParseTemArray:activityArray,wxParseIndex:index,showTitle:true}}"></template>
+            </block>
+            <!-- top_activity end -->
+            <!-- essence start -->
+            <block wx:elif="{{tabitem.type=='essence'}}">
+              <template is="wePanel" data="{{...item.target,index,wxParseTemArray:essenceArray,wxParseIndex:index,showTitle:true}}"></template>
+            </block>
+            <!-- essence end -->
+          </view>
+          <template is="loadmore" data="{{show:tabitem.isLoading}}"></template>
+          <template is="page-end" data="{{show:tabitem.paging.is_end}}"></template>
         </view>
-  <template is="loadmore" data="{{show:tabitem.isLoading}}"></template>
-<template is="page-end" data="{{show:tabitem.paging.is_end}}"></template>
-</view>
-       
-       
+
+
       </scroll-view>
     </swiper-item>
   </swiper>

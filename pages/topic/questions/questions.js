@@ -22,39 +22,40 @@ Page({
     scrollLeft: 0, //tab标题的滚动条位置
     slideOffset: 0,
     tabW: 0,
-    screenHeight: getApp().globalData.systemInfo.screenHeight, //窗口高度
+    windowHeight: 0, //窗口高度
     narbar: [{
-        title: "讨论",
-        slotname: "slot1",
-        type: "top_activity",
-        datasourceId: "activityDataSource",
-        wxParseTemArrayName: "activityArray",
-        currentPage: 0, //当前起始筛选条数
-        isRender: false,
-        isLoading: false,
-        paging: {},
-      },
-      {
-        title: "精华",
-        slotname: "slot2",
-        type: "essence",
-        datasourceId: "essenceDataSource",
-        wxParseTemArrayName: "essenceArray",
-        currentPage: 0, //当前起始筛选条数
-        isRender: false,
-        isLoading: false,
-        paging: {},
+      title: "讨论",
+      slotname: "slot1",
+      type: "top_activity",
+      datasourceId: "activityDataSource",
+      wxParseTemArrayName: "activityArray",
+      currentPage: 0, //当前起始筛选条数
+      isRender: false,
+      isLoading: false,
+      paging: {},
+    },
+    {
+      title: "精华",
+      slotname: "slot2",
+      type: "essence",
+      datasourceId: "essenceDataSource",
+      wxParseTemArrayName: "essenceArray",
+      currentPage: 0, //当前起始筛选条数
+      isRender: false,
+      isLoading: false,
+      paging: {},
 
-      }
+    }
     ],
     activityArray: [],
     essenceArray: [],
-    clientY: getApp().globalData.systemInfo.screenHeight - 80,
-    clientHeight: getApp().globalData.systemInfo.screenHeight//scroll-view内容的高度 = 设备的高度 - weui-narbar高度
-
+    clientY: 0,
+    clientHeight: 0,//scroll-view内容的高度 = 设备的高度 - weui-narbar高度
+    isScrolling: false,    //是否正在处理滚动事件，避免一次滚动多次触发
+    isIphoneX:false
   },
   /**切换tab导航标题 */
-  switchNav: function(e) {
+  switchNav: function (e) {
     var that = this;
     var activeIndex = e.currentTarget.dataset.index;
     if (this.data.activeIndex === activeIndex) {
@@ -66,7 +67,7 @@ Page({
     }
   },
   /**切换tab内容 */
-  switchTab: function(e) {
+  switchTab: function (e) {
     // swiper组件绑定change事件tabChange，通过e.detail.current拿到当前页
     var activeIndex = e.detail.current;
 
@@ -77,7 +78,7 @@ Page({
       this.getDataSource(activeIndex);
 
   },
-  tabClick: function(e) {
+  tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
@@ -147,15 +148,19 @@ Page({
 
 
     //  console.log(topicsUrl)//https://www.zhihu.com/api/v4/topics/19629946/feeds/top_activity?include=data[*]&limit=5&after_id=5589.15728
-  /*  wx.showLoading({
-      title: '加载中...',
-    })*/
+    /*  wx.showLoading({
+        title: '加载中...',
+      })*/
 
     this.changeLoadmoreStatus(narbar, narbarItem, "isLoading", true);
+    // 如下一页：http://www.zhihu.com/api/v4/topics/19629946/feeds/top_activity?include=data%5B%2A%5D&limit=10&after_id=5725.34785&offset=0
+    if (topicsUrl.indexOf("http://") > -1)
+    topicsUrl = topicsUrl.replace("http://", "https://");
+      
     api.GET(topicsUrl).then((res) => {
-    /* if (Object.keys(paging).length > 0)  //test
-        if (!paging.is_end)
-          return*/
+      /* if (Object.keys(paging).length > 0)  //test
+          if (!paging.is_end)
+            return*/
       this.changeLoadmoreStatus(narbar, narbarItem, "isLoading", false);
       var dataSource = res.data;
       // var dataSourceKey = "dataSource." + datasourceId;
@@ -188,6 +193,7 @@ Page({
       Object.assign(dataTemp, {
         narbar
       });
+      dataTemp["isScrolling"]=false;
       this.setData(dataTemp)
       var that = this;
       this.data.dataSource[datasourceId].forEach((item, index) => {
@@ -215,13 +221,36 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     tid = options.id;
     if (!tid) //test
       tid = "19629946";
-      wx.setNavigationBarTitle({
-        title: options.name,
-      })
+    if (!options.name)
+      options.name = "滑板";
+    wx.setNavigationBarTitle({
+      title: options.name,
+    })
+var that=this;
+wx.getSystemInfo({
+  success: function(res) {
+    var windowHeight = res.windowHeight;
+    
+    var dataTemp = {
+      windowHeight: windowHeight,
+  //    clientHeight: windowHeight,
+      clientY: windowHeight - 80
+    }
+    if (res.model.search('iPhone X') != -1) {
+      dataTemp.isIphoneX = true;
+      dataTemp.clientHeight=windowHeight-34;
+    }else{
+      dataTemp.clientHeight = windowHeight ;
+    }
+
+    that.setData(dataTemp)
+  },
+})
+
     this.getDataSource(this.data.activeIndex);
 
 
@@ -232,64 +261,72 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   onScrollReachBottom() {
+    if (this.data.isScrolling)
+    return
+    this.setData({
+      isScrolling:true
+    })
     this.getDataSource(this.data.activeIndex);
   },
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
-  onScroll: function(e) {
-    console.log(this.data.clientHeight)
- //   console.log(e.detail.deltaY)
-    if (e.detail.deltaY > 20)    //向上滚动 为避免回弹出现短时间内上下滚动引起的灵敏度过高导致不断闪烁效果，将阀值设置为20
+  onScroll: function (e) {
+    e.detail.scrollTop > this.data.clientY ? this.scrollToTop.show() : this.scrollToTop.hide();
+    return
+  //  console.log(this.data.clientHeight)
+    //   console.log(e.detail.deltaY)
+    if (e.detail.deltaY > 40)    //向上滚动 为避免回弹出现短时间内上下滚动引起的灵敏度过高导致不断闪烁效果，将阀值设置为20
     {
+     // console.log(e.detail.deltaY)
       this.setData({
         showNarBar: true,
-        clientHeight: this.data.screenHeight - 30
+      //  clientHeight: this.data.windowHeight - 30
       })
-    } else if (e.detail.deltaY < -20) {    //向下滚动
+    } else if (e.detail.deltaY < -40) {    //向下滚动
       this.setData({
         showNarBar: false,
-        clientHeight: this.data.screenHeight
+     //   clientHeight: this.data.windowHeight
       })
     }
-    e.detail.scrollTop > this.data.clientY ? this.scrollToTop.show() : this.scrollToTop.hide();
+    
 
   },
   scrollToScrollTop() {
@@ -300,7 +337,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

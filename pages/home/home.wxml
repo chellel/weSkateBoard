@@ -61,7 +61,6 @@
                     <view class='weui-panel-hd'>
                       <view class="weui-media-box__title">{{item.trick}}</view>
                       <view class="weui-media-box_tip">
-
                         <icon class="icon iconfont icon-eye"></icon>
                         <view class="page-tip-text">
                           {{item.viewcount}}
@@ -72,11 +71,10 @@
                   </view>
 
                 </view>
-
+                <view class="image-container"> <image src="http://img3.doubanio.com/view/note/raw/public/p49861582.jpg" />
+      </view>
               </view>
-
-              <image src="http://img3.doubanio.com/view/note/raw/public/p49861582.jpg" />
-              <view>
+                       <view>
               </view>
             </block>
 

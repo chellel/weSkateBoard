@@ -1,7 +1,8 @@
 <template name="loadmore">
-  <view class="weui-loadmore" hidden="{{!show}}">
+  <view class="weui-loadmore">
+   <block wx:if="{{show}}">
     <view class="weui-loading"></view>
-    <view class="weui-loadmore__tips">正在加载</view>
+    <view class="weui-loadmore__tips">正在加载</view></block>
   </view>
 
 </template>

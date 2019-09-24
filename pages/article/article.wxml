@@ -1,0 +1,13 @@
+<!--pages/article/article.wxml-->
+<import src="../../utils/wxParse/wxParse.wxml" />
+ <view class="weui-article">
+            <view class="weui-article__h1">{{article.title}}</view>
+            <view class="weui-article__section">
+                <view class="weui-article__section">
+                    <view class="weui-article__h3">来源：{{article.from}} <view class="weui-article__tip"> {{article.time}}</view></view>
+                    <view class="weui-article__p">
+                     <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+                    </view>
+                </view>
+            </view>
+        </view>

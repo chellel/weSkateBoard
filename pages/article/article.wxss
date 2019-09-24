@@ -1,0 +1,9 @@
+/* pages/article/article.wxss */
+.weui-article__tip{
+  color: rgb(112, 112, 112);
+  float: right;
+}
+.weui-article__section{
+  overflow: hidden;
+
+}
