@@ -238,7 +238,9 @@ wx.getSystemInfo({
     var dataTemp = {
       windowHeight: windowHeight,
   //    clientHeight: windowHeight,
-      clientY: windowHeight - 80
+      clientY: windowHeight 
+
+    //  clientY: windowHeight - 80
     }
     if (res.model.search('iPhone X') != -1) {
       dataTemp.isIphoneX = true;
@@ -310,7 +312,7 @@ wx.getSystemInfo({
 
   onScroll: function (e) {
     e.detail.scrollTop > this.data.clientY ? this.scrollToTop.show() : this.scrollToTop.hide();
-    return
+    
   //  console.log(this.data.clientHeight)
     //   console.log(e.detail.deltaY)
     if (e.detail.deltaY > 40)    //向上滚动 为避免回弹出现短时间内上下滚动引起的灵敏度过高导致不断闪烁效果，将阀值设置为20

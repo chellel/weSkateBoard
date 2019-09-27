@@ -15,7 +15,7 @@ article:{}
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    api.GET(getApp().globalData.connectUrl+"api/getArticle2").then(res => {
+    api.POST(getApp().globalData.connectUrl +"api/getArticlebyId",{id:options.id}).then(res => {
       var that = this;
       this.setData({
         article: res.data
