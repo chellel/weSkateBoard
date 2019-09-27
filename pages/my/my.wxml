@@ -56,15 +56,25 @@
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
           </view>
+           <button  open-type="contact" class="weui-cell weui-cell_access" hover-class="none">
+            <view class="weui-cell__hd">
+              <icon class="icon iconfont icon-user"></icon>
+            </view>
+            <view class="weui-cell__bd weui-cell_primary">
+              <view>联系客服</view>
+            </view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </button>
           <navigator url="/pages/timeline/timeline" class="weui-cell weui-cell_access" hover-class="none">
             <view class="weui-cell__hd">
-              <icon class="icon iconfont icon-star1"></icon>
+              <icon class="icon iconfont icon-message"></icon>
             </view>
             <view class="weui-cell__bd weui-cell_primary">
               <view>版本更新日志</view>
             </view>
             <view class="weui-cell__ft weui-cell__ft_in-access"></view>
           </navigator>
+          
         </view>
       </view>
     </view>

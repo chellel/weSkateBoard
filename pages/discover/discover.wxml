@@ -1,13 +1,13 @@
 <!--pages/discover/discover.wxml-->
 <view class='page'>
   <view class='section'>
-    <block wx:for="{{dataSource1}}" wx:for-item="item" wx:key="id" wx:for-index="index">
-      <image class='discover-image' src="{{item.imgUrl}}" data-datasource="dataSource1" data-index="{{index}}" bindtap="onItemClick" mode="aspectFill" lazy-load="true" />
+    <block wx:for="{{dataSource1}}" wx:for-item="item"  wx:key="id" wx:for-index="index">
+      <image class='discover-image' src="{{item.imgUrl}}" data-datasource="dataSource1"  data-id="{{item.id}}"data-index="{{index}}" bindtap="onItemClick" mode="aspectFill" lazy-load="true" />
     </block>
   </view>
   <view class='section'>
     <view class='image-content col-xs-6' wx:for="{{dataSource2}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-      <image class='discover-image' src="{{item.imgUrl}}" data-datasource="dataSource2" data-index="{{index}}" bindtap="onItemClick" mode="aspectFill" lazy-load="true" />
+      <image class='discover-image' src="{{item.imgUrl}}" data-datasource="dataSource2"  data-id="{{item.id}}"data-index="{{index}}" bindtap="onItemClick" mode="aspectFill" lazy-load="true" />
     </view>
   </view>
 </view>

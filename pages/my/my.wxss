@@ -99,3 +99,9 @@ color: #fff;
   opacity: 0.6;
   color:#ed1b24;
 }
+
+button.weui-cell{
+  text-align: left;
+  line-height: unset;
+  
+}
