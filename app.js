@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -17,6 +17,11 @@ App({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          var userInfo = wx.getStorageSync("userInfo");
+          if (userInfo) {
+            this.globalData.userInfo = userInfo
+            return
+          }
           wx.getUserInfo({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
@@ -34,18 +39,18 @@ App({
     })
 
     wx.getSystemInfo({
-      success: (res)=> {
+      success: (res) => {
         this.globalData.systemInfo = res;
       },
     })
   },
   globalData: {
-    connectUrl:"https://www.fastmock.site/mock/a9640dd42395bca80f5e098ce33afdd1/skateboard/",
+    connectUrl: "https://www.fastmock.site/mock/a9640dd42395bca80f5e098ce33afdd1/skateboard/",
     userInfo: null,
-    message:{
-      noDataText:"暂无数据",
-      loadingText:"加载中..."
+    message: {
+      noDataText: "暂无数据",
+      loadingText: "加载中..."
     },
-    systemInfo:null
+    systemInfo: null
   }
 })

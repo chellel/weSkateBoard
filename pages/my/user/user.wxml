@@ -15,13 +15,13 @@
         <view class="weui-cell">
           <view class="weui-cell__hd col-md-4">昵称</view>
           <view class="weui-cell__bd">
-            <input name="nickName" placeholder="昵称" value="YI"></input>
+            <input name="nickName" placeholder="昵称" value="{{userInfo.nickName}}"></input>
           </view>
         </view>
         <view class="weui-cell">
           <view class="weui-cell__hd col-md-4">手机号</view>
           <view class="weui-cell__bd">
-            <input name="phone" placeholder="手机号" value=""></input>
+            <input name="phone" placeholder="手机号" value="{{userInfo.phone}}"></input>
           </view>
         </view>
         <view class="weui-cell">

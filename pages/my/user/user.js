@@ -23,8 +23,14 @@ Page({
       userInfo.phone = user.phone;
       userInfo.gender = user.gender;
       this.setData({
-        userInfo: userInfo
+        userInfo
       })
+      app.globalData.userInfo=userInfo;
+      debugger
+     wx.setStorage({
+       key: 'userInfo',
+       data: userInfo,
+     })
     }
     wx.showToast({
       title: '保存成功',
