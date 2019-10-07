@@ -54,3 +54,7 @@ weui-panel:first-child:after{
 opacity: .6;
 color: #000;
 }
+
+.weui-panel__title{
+  padding-bottom: 4px;
+}

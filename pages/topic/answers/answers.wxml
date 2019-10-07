@@ -3,6 +3,10 @@
 <import src="/templates/loadmore/loadmore.wxml" />
 
 <view class="page">
+  <view class="page__hd">
+        <view class="page__title">{{title}}</view>
+        <view class="page__desc">全部 {{paging.totals?paging.totals:0}} 个回答</view>
+    </view>
   <view class="weui-panel weui-panel-multi" wx:for="{{dataSource}}" wx:for-item="item" wx:for-index="index" wx:key="item.id">
     <template is="wePanel" data="{{...item,index,wxParseTemArray:contentArray,wxParseIndex:index,showTitle:false}}"></template>
   </view>

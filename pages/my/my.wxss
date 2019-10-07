@@ -24,16 +24,16 @@
   padding-top: 5px;
   padding-bottom: 10px;
 }
+
 .weui-cell_active{
   background: none;
   opacity: 0.9;
 }
 .weui-media-box__user:active{
   opacity: 0.8;
-
 }
 .weui-media-box.weui-media-box__hd_flex .weui-media-box__bd:active{
-  opacity: 0.9;
+  opacity: 0.6;
 }
 .weui-media-box__hd_flex .weui-media-box__title,
 .weui-media-box__hd_flex .weui-media-box__desc {

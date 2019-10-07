@@ -12,7 +12,7 @@ page {
 }
 
 .weui-media-box {
-  padding: 8px 15px;
+  padding: 6px 15px;
 }
 
 .weui-media-box__hd:active, .weui-media-box:active weui-media-box__title {

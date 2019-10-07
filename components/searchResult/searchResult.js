@@ -50,6 +50,18 @@ Component({
         url: '/pages/topic/answers/answers?id=' + id
       })
     },
+    onTitleClick(e) {
+      var index = e.currentTarget.dataset.index;
+      var {
+        activeIndex,
+        narbar
+      } = this.data;
+      var { id,title} = this.data.dataSource[index].object.question;
+      wx.navigateTo({
+        url: `../topic/answers/answers?id=${id}&title=${title}`,
+      })
+
+    },
     onItemClick(e) {
       var index = e.currentTarget.dataset.index;
       var id = this.data.dataSource[index].object.id;
@@ -89,7 +101,6 @@ Component({
         var dataSource = res.data;
         var that = this;
         dataSource = handleHtml(dataSource, that);
-        console.log(dataSource)
         /**替换文本中所有包含em的字符串 */
         function replaceEM(item, content) {
           item[content] = item[content].replace(/<em>/g, '').replace(/<\/em>/g, '');

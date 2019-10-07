@@ -7,29 +7,54 @@ Page({
    */
   data: {
     userInfo: {},
-    hasUserInfo:false,
+    hasUserInfo: false,
     isauth: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    userdata: [{
+      name: "我的关注",
+      value: 0
+    }, {
+      name: "我的收藏",
+      value: 0
+    }, {
+      name: "我的评论",
+      value: 0
+    }, {
+      name: "我的点赞",
+      value: 0
+    }]
   },
 
-  getUserInfo: function (e) {
+  getUserInfo: function(e) {
     if (e.detail.errMsg && e.detail.errMsg === 'getUserInfo:fail auth deny') {
       this.setData({
         isauth: false
       })
     }
-    if (e.detail.userInfo) {
+    if (JSON.stringify(this.data.userInfo) === '{}') {
+      if (!e.detail.userInfo)
+        return
+      if (app.globalData.userInfo == null || JSON.stringify(app.globalData.userInfo) === '{}') {
+        app.globalData.userInfo = e.detail.userInfo
+        var userdata = this.data.userdata;
+        userdata.map(item => {
+          item.value = Math.floor(Math.random() * 200 + 1)
+        })
+        wx.setStorage({
+          key: 'userdata',
+          data: userdata,
+        })
+        this.setData({
+          userInfo: e.detail.userInfo,
+          hasUserInfo: true,
+          userdata
+        })
+      }
+
+    } else {
       wx.navigateTo({
         url: 'user/user',
       })
-      if (JSON.stringify(app.globalData.userInfo) === '{}'){
-        app.globalData.userInfo = e.detail.userInfo
-        this.setData({
-          userInfo: e.detail.userInfo,
-          hasUserInfo: true
-        })
-      }
-     
     }
   },
   /**
@@ -50,6 +75,12 @@ Page({
           hasUserInfo: true
         })
       }
+    }
+    var userdata = wx.getStorageSync("userdata")
+    if (userdata) {
+      this.setData({
+        userdata: userdata
+      })
     }
   },
 

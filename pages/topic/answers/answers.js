@@ -75,10 +75,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var type = options.type;
+    var title = options.title;
+    this.setData({
+      title
+    })
+    wx.setNavigationBarTitle({
+      title
+    })
     qId = options.id;
     if (!qId)
       qId = "47825917"; //test
+   
     this.getDataSource();
     this.scrollToTop = this.selectComponent("#scrollToTop");
 
