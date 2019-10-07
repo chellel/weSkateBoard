@@ -2,10 +2,6 @@
 <!--
 如：
     <template is="wePanel" data="{{...item,index,wxParseTemArray:contentArray,wxParseIndex:index,showTitle:false}}"></template>
-
-
-
-
 -->
 <template name="wePanel">
   <view class="weui-panel__hd">
@@ -15,7 +11,7 @@
     <view class="weui-media-box weui-media-box_text">
     <block  wx:if="{{showTitle}}">
       <view class="weui-media-box__title weui-media-box__title_in-text" data-index="{{index}}" bindtap='onTitleClick'>
-        {{question.title}}</view>
+      {{question.title}}</view>
         </block>
       <view class='weui-media-box__content' data-index="{{index}}" bindtap="onItemClick">
         <view class="weui-media-box__desc">

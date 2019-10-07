@@ -15,8 +15,12 @@ article:{}
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    api.GET(getApp().globalData.connectUrl+"api/getArticle2").then(res => {
+    wx.showLoading({
+      title: '加载中...',
+    })
+    api.GET(getApp().globalData.connectUrl+"api/getArticle").then(res => {
       var that = this;
+      wx.hideLoading()
       this.setData({
         article: res.data
       })

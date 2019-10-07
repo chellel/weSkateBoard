@@ -82,17 +82,14 @@ Component({
         url = paging.next;
       } else {
         url = `https://www.zhihu.com/api/v4/search_v3?t=general&q=${q}&correction=1&offset=0&limit=${limit}&lc_idx=0&show_all_topics=0`;
-        
       }
-
       api.GET(url).then(res => {
         // if (JSON.stringify(paging) !== '{}')  return   //test
         var bindName = "content";
-
         var dataSource = res.data;
         var that = this;
         dataSource = handleHtml(dataSource, that);
-
+        console.log(dataSource)
         /**替换文本中所有包含em的字符串 */
         function replaceEM(item, content) {
           item[content] = item[content].replace(/<em>/g, '').replace(/<\/em>/g, '');
@@ -137,7 +134,9 @@ Component({
                 if (object.type == "answer") {
                   object.author.name = object.author.name.replace(/<em>/g, '').replace(/<\/em>/g, '');
                   replaceEM(object, "excerpt");
-
+                  replaceEM(object.question, "name");
+                  if(!object.question.title)
+                    object.question.title = object.question.name;
                   var wxParseTemArrayName = "contentArray";
 
                   /*    if (Array.isArray(that.data[wxParseTemArrayName]))
@@ -169,16 +168,6 @@ Component({
           })
           return dataSource;
         }
-
-        this.setData({
-          dataSource: this.data.dataSource.concat(dataSource),
-          paging: res.paging,
-          isLoading: false
-        })
-
-
-        //     console.log(dataSource)
-
         var currDataSource = this.data.dataSource;
         dataSource = [...currDataSource, ...dataSource];
         this.setData({

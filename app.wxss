@@ -45,5 +45,9 @@
 }
 
 .weui-loadmore{
-  height: 3.2em;
+ /* height: 3.2em;*/
+
+}
+.weui-loadmore_line{
+ margin-top: 1.5em;
 }

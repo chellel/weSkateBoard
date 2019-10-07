@@ -1,9 +1,11 @@
 @import "/style/weui.wxss";
 @import "/templates/wePanel/wePanel.wxss";
 @import "/style/iconfont.wxss";
-page{
+
+page {
   height: 100%;
 }
+
 .weui-panel.weui-box-panel {
   margin: 10px;
   box-shadow: 2px 2px 10px 0px #ccc;
@@ -17,13 +19,18 @@ page{
   opacity: 0.6;
 }
 
-.weui-media-box__title {
+.weui-panel .weui-media-box__title {
+  font-size: 17px;
+}
+
+.weui-media-box-topic .weui-media-box__title {
   flex: 1;
   -webkit-flex: 1;
   -webkit-box-flex: 1;
   display: flex;
   align-items: center;
   font-weight: bold;
+  font-size: 17px;
 }
 
 .weui-panel.weui-box-panel::before, .weui-panel.weui-box-panel::after {
@@ -86,9 +93,6 @@ page{
   color: #ed1b24;
 }
 
-.weui-panel-index .weui-media-box__title {
-  font-size: 14px;
-}
 
 .weui-panel-index .weui-media-box__desc {
   display: flex;
@@ -116,6 +120,6 @@ page{
   display: flex;
 }
 
-.weui-media-box .weui-media-box__bd{
-  width:100%;
+.weui-media-box .weui-media-box__bd {
+  width: 100%;
 }

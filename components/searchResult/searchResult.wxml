@@ -5,7 +5,7 @@
 <!-- wiki_box start -->
 <block wx:if="{{topicInfo}}">
   <view class="weui-panel weui-box-panel">
-    <view class="weui-media-box weui-media-box_text">
+    <view class="weui-media-box weui-media-box-topic weui-media-box_text">
       <navigator url="/pages/topic/questions/questions?id={{topicInfo.id}}&name={{topicInfo.name}}" hover-class="none">
         <view class="weui-media-box__hd">
           <image class="avator" src="{{topicInfo.avatar_url}}" />
@@ -80,7 +80,7 @@
 
   <view class="weui-panel" wx:for="{{dataSource}}" wx:key="index">
     <block wx:if="{{item.object.type=='answer'}}">
-      <template is="wePanel" data="{{...item.object,index,wxParseTemArray:contentArray,wxParseIndex:item.object.search_result_answer_index,showTitle:false}}"></template>
+      <template is="wePanel" data="{{...item.object,index,wxParseTemArray:contentArray,wxParseIndex:item.object.search_result_answer_index,showTitle:true}}"></template>
     </block>
 
   </view>

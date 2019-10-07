@@ -162,6 +162,7 @@ Page({
           if (!paging.is_end)
             return*/
       this.changeLoadmoreStatus(narbar, narbarItem, "isLoading", false);
+      debugger
       var dataSource = res.data;
       // var dataSourceKey = "dataSource." + datasourceId;
       var dataTemp = {};
