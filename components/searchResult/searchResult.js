@@ -23,7 +23,7 @@ Component({
     readIndexMore: false,
     readIndex: 1, //默认收起时只显示一行
     isLoading: false,
-    clientY: getApp().globalData.systemInfo.windowHeight - 80,
+    clientY: 0,
 
   },
 
@@ -197,6 +197,12 @@ Component({
   },
 
   ready: function() {
+    var that=this;
+    wx.getSystemInfo({
+      success: function(res) {
+that.setData({clientY:res.windowHeight});
+      },
+    })
     this.getDataSource();
     this.scrollToTop = this.selectComponent("#scrollToTop");
 

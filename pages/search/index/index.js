@@ -6,7 +6,7 @@ Page({
    */
   data: {
    q:"",
-    windowHeight: getApp().globalData.systemInfo.windowHeight
+    windowHeight: 0
   
   },
   onPageScroll(e) {
@@ -27,7 +27,14 @@ Page({
     q
   })
     this.searchResult = this.selectComponent("#searchResult");
-
+    var that=this;
+wx.getSystemInfo({
+  success: function(res) {
+    that.setData({
+      windowHeight:res.windowHeight
+    })
+  },
+})
   },
 
   /**

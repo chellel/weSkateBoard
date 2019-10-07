@@ -18,7 +18,7 @@ article:{}
     wx.showLoading({
       title: '加载中...',
     })
-    api.GET(getApp().globalData.connectUrl+"api/getArticle").then(res => {
+    api.POST(getApp().globalData.connectUrl +"api/getArticlebyId",{id:options.id}).then(res => {
       var that = this;
       wx.hideLoading()
       this.setData({

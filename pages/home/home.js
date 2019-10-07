@@ -236,9 +236,10 @@ Page({
     var index = e.currentTarget.dataset.index;
 var dataSource=this.data.switchDataSource;
 var item=dataSource[index];
-    var data = JSON.stringify(item);
+    
+    
     wx.navigateTo({
-      url: `/pages/article/article?index=${index}`,
+      url: `/pages/article/article?id=${item.id}`,
     })
   },
   previewImg(e) {
