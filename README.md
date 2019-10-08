@@ -7,6 +7,8 @@
 
 目前慢慢优化，先自我欣赏。可在微信中搜索"onSkate"获取。
 
+2019/10/8 更新：在审核失败原因中提及小程序涉及用户自行生成内容的发布/分享/交流，属社交范畴，为个人主体小程序未开放类目，建议申请企业主体小程序，因此线上版本非代码最新展示效果，此问题后期处理。
+
 <img src="https://github.com/chellel/myblog/blob/master/images/skateboard/onSkate_wechat.png" alt="二维码" width="250" />
 
 #### 效果
